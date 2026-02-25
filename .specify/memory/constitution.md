@@ -1,21 +1,17 @@
 <!--
   Sync Impact Report
   ==================
-  Version change: 1.1.0 → 1.2.0
+  Version change: 1.2.0 → 1.3.0
 
   Modified principles:
-    - VI. Accessibility → expanded with @angular/aria directive
-      requirements for custom interactive components
+    - I. Component-First → added FormBuilder convention for
+      Reactive Forms construction
 
-  Added sections:
-    - Angular Conventions > Accessibility (new subsection with
-      @angular/aria usage conventions)
+  Added sections: N/A
 
   Removed sections: N/A
 
-  Modified sections:
-    - Technology Stack → added @angular/aria
-    - Quality Gates → added WAI-ARIA keyboard interaction gate
+  Modified sections: N/A
 
   Templates requiring updates:
     - .specify/templates/plan-template.md ✅ no changes needed
@@ -24,11 +20,12 @@
       (no hardcoded principle references)
     - .specify/templates/tasks-template.md ✅ no changes needed
       (no hardcoded principle references)
-    - .specify/templates/commands/*.md ✅ no command files exist yet
+    - .specify/templates/commands/*.md ✅ no command files exist
 
   Follow-up TODOs:
-    - Move @angular/aria from devDependencies to dependencies in
-      package.json (it is a runtime dependency, not dev-only)
+    - Existing code in src/app/checklist/ uses manual FormGroup/
+      FormControl/FormArray instantiation. Refactor to use
+      FormBuilder in a follow-up PR.
 -->
 
 # Angular Sample Constitution
@@ -51,6 +48,10 @@ defined inputs and outputs. Components MUST:
 - Be independently testable in isolation
 - Prefer inline templates for small components
 - Prefer Reactive forms over Template-driven forms
+- Prefer `FormBuilder` (via `inject(FormBuilder)`) to construct
+  `FormGroup`, `FormControl`, and `FormArray` instances instead of
+  manual `new FormGroup()` / `new FormControl()` / `new FormArray()`
+  instantiation
 - Use paths relative to the component TS file for external
   templates/styles
 
@@ -261,4 +262,4 @@ architectural choices MUST comply with these principles.
 - Complexity violations MUST be justified before approval
 - Quarterly review of constitution relevance is RECOMMENDED
 
-**Version**: 1.2.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-25
+**Version**: 1.3.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-25

@@ -24,6 +24,7 @@
   "packageManager": "npm@10.9.4",
   "dependencies": {
     "@angular-architects/ngrx-toolkit": "^21.0.1",
+    "@angular/aria": "^0.0.1",
     "@angular/cdk": "~21.1.5",
     "@angular/common": "^21.1.0",
     "@angular/compiler": "^21.1.0",
@@ -42,7 +43,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@angular/aria": "^0.0.1",
     "@angular/build": "^21.1.5",
     "@angular/cli": "^21.1.5",
     "@angular/compiler-cli": "^21.1.0",
