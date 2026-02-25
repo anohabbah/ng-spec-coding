@@ -21,8 +21,8 @@ description: "Task list for checklist items template management feature"
 
 **Purpose**: Feature folder structure, types, schemas, and routing
 
-- [ ] T001 Create checklist feature folder structure and define Category type, ChecklistItem interface, and ChecklistItemSchema Zod schema in src/app/checklist/checklist.model.ts
-- [ ] T002 [P] Configure lazy-loaded route at /checklist in src/app/checklist/checklist.routes.ts and update src/app/app.routes.ts with loadChildren pointing to checklist.routes.ts
+- [x] T001 Create checklist feature folder structure and define Category type, ChecklistItem interface, and ChecklistItemSchema Zod schema in src/app/checklist/checklist.model.ts
+- [x] T002 [P] Configure lazy-loaded route at /checklist in src/app/checklist/checklist.routes.ts and update src/app/app.routes.ts with loadChildren pointing to checklist.routes.ts
 
 ---
 
@@ -36,11 +36,11 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category sorted by position ascending, totalItems sums all items, isEmpty returns true when no items, store state survives simulated reload via localStorage round-trip, corrupted localStorage data is discarded and store initializes empty) in src/app/checklist/checklist.store.spec.ts
+- [x] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category sorted by position ascending, totalItems sums all items, isEmpty returns true when no items, store state survives simulated reload via localStorage round-trip, corrupted localStorage data is discarded and store initializes empty) in src/app/checklist/checklist.store.spec.ts
 
 ### Implementation for Store
 
-- [ ] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories grouping entities by category and sorting by position ascending, totalItems, isEmpty), and withStorageSync({ key: 'checklistTemplate', autoSync: true }) from ngrx-toolkit for localStorage persistence; validate hydrated data with Zod safeParse on restore (discard and start empty if invalid) in src/app/checklist/checklist.store.ts
+- [x] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories grouping entities by category and sorting by position ascending, totalItems, isEmpty), and withStorageSync({ key: 'checklistTemplate', autoSync: true }) from ngrx-toolkit for localStorage persistence; validate hydrated data with Zod safeParse on restore (discard and start empty if invalid) in src/app/checklist/checklist.store.ts
 
 **Checkpoint**: Store ready — user story implementation can now begin
 
@@ -56,13 +56,13 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T005 [P] [US1] Write failing tests for category-group component (renders items from FormArray, displays category title, shows empty state message) in src/app/checklist/category-group/category-group.spec.ts
-- [ ] T006 [P] [US1] Write failing tests for checklist.page component view mode (reads store on init, builds FormGroup with 3 FormArrays, renders 3 category-group components, handles empty store with empty FormArrays) in src/app/checklist/checklist.page.spec.ts
+- [x] T005 [P] [US1] Write failing tests for category-group component (renders items from FormArray, displays category title, shows empty state message) in src/app/checklist/category-group/category-group.spec.ts
+- [x] T006 [P] [US1] Write failing tests for checklist.page component view mode (reads store on init, builds FormGroup with 3 FormArrays, renders 3 category-group components, handles empty store with empty FormArrays) in src/app/checklist/checklist.page.spec.ts
 
 ### Implementation for User Story 1
 
-- [ ] T007 [US1] Implement category-group component with input(category, formArray), OnPush change detection, display items with @for loop, show empty state, include ARIA labels on category heading and item list in src/app/checklist/category-group/category-group.ts with category-group.html and category-group.css
-- [ ] T008 [US1] Implement checklist.page component: inject ChecklistStore, build FormGroup with 3 FormArrays (MORNING, EVENING, NIGHT) populated from store on init, render 3 category-group components, include ARIA landmark and page heading in src/app/checklist/checklist.page.ts with checklist.page.html and checklist.page.css
+- [x] T007 [US1] Implement category-group component with input(category, formArray), OnPush change detection, display items with @for loop, show empty state, include ARIA labels on category heading and item list in src/app/checklist/category-group/category-group.ts with category-group.html and category-group.css
+- [x] T008 [US1] Implement checklist.page component: inject ChecklistStore, build FormGroup with 3 FormArrays (MORNING, EVENING, NIGHT) populated from store on init, render 3 category-group components, include ARIA landmark and page heading in src/app/checklist/checklist.page.ts with checklist.page.html and checklist.page.css
 
 **Checkpoint**: Page displays stored items grouped by category. Empty store shows 3 empty groups. MVP complete.
 
@@ -78,13 +78,13 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T009 [P] [US2] Write failing tests for add item (appends FormGroup to FormArray, generates id, empty label shows validation error and prevents add, whitespace-only label shows validation error and prevents add) and delete item (removes FormGroup from FormArray at correct index) in src/app/checklist/category-group/category-group.spec.ts
-- [ ] T010 [P] [US2] Write failing test verifying store is unchanged after add/delete before submit in src/app/checklist/checklist.page.spec.ts
+- [x] T009 [P] [US2] Write failing tests for add item (appends FormGroup to FormArray, generates id, empty label shows validation error and prevents add, whitespace-only label shows validation error and prevents add) and delete item (removes FormGroup from FormArray at correct index) in src/app/checklist/category-group/category-group.spec.ts
+- [x] T010 [P] [US2] Write failing test verifying store is unchanged after add/delete before submit in src/app/checklist/checklist.page.spec.ts
 
 ### Implementation for User Story 2
 
-- [ ] T011 [US2] Add item input field with required Validators.required and aria-label, add button with aria-label, and per-item delete button with aria-label to category-group component in src/app/checklist/category-group/category-group.ts and category-group.html
-- [ ] T012 [US2] Wire add logic (generate id via crypto.randomUUID(), trim label before validation, push FormGroup to FormArray, clear input) and delete logic (removeAt index from FormArray) in category-group component in src/app/checklist/category-group/category-group.ts
+- [x] T011 [US2] Add item input field with required Validators.required and aria-label, add button with aria-label, and per-item delete button with aria-label to category-group component in src/app/checklist/category-group/category-group.ts and category-group.html
+- [x] T012 [US2] Wire add logic (generate id via crypto.randomUUID(), trim label before validation, push FormGroup to FormArray, clear input) and delete logic (removeAt index from FormArray) in category-group component in src/app/checklist/category-group/category-group.ts
 
 **Checkpoint**: Users can add and delete items within each category. Validation prevents empty labels. Store unchanged until submit.
 
@@ -100,12 +100,12 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T013 [US3] Write failing tests for reorder (moveItemInArray changes FormArray order via drag-drop, up button moves item up one position, down button moves item down, first item up button disabled, last item down button disabled, cross-category drop prevented) in src/app/checklist/category-group/category-group.spec.ts
+- [x] T013 [US3] Write failing tests for reorder (moveItemInArray changes FormArray order via drag-drop, up button moves item up one position, down button moves item down, first item up button disabled, last item down button disabled, cross-category drop prevented) in src/app/checklist/category-group/category-group.spec.ts
 
 ### Implementation for User Story 3
 
-- [ ] T014 [US3] Add CdkDropList and CdkDrag from @angular/cdk/drag-drop to category-group component for drag-and-drop reorder within category (no cdkDropListConnectedTo to prevent cross-category moves), rely on CDK's built-in live announcements and keyboard support for accessibility in src/app/checklist/category-group/category-group.ts and category-group.html
-- [ ] T015 [US3] Add up/down buttons per item with aria-labels for keyboard-accessible reorder (moveItemInArray on FormArray, disable up on first item, disable down on last item) in src/app/checklist/category-group/category-group.ts and category-group.html
+- [x] T014 [US3] Add CdkDropList and CdkDrag from @angular/cdk/drag-drop to category-group component for drag-and-drop reorder within category (no cdkDropListConnectedTo to prevent cross-category moves), rely on CDK's built-in live announcements and keyboard support for accessibility in src/app/checklist/category-group/category-group.ts and category-group.html
+- [x] T015 [US3] Add up/down buttons per item with aria-labels for keyboard-accessible reorder (moveItemInArray on FormArray, disable up on first item, disable down on last item) in src/app/checklist/category-group/category-group.ts and category-group.html
 
 **Checkpoint**: Items reorderable within each category via drag-drop and buttons. Cross-category moves blocked.
 
@@ -121,12 +121,12 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T016 [US4] Write failing tests for submit (form value validated with Zod, saved to store via saveChecklist, form reflects new persisted state, submitting empty template with no items succeeds, submitting with one category empty and others populated persists correctly) and reset (form reverts to store state, all unsaved changes discarded, form pristine after reset) in src/app/checklist/checklist.page.spec.ts
+- [x] T016 [US4] Write failing tests for submit (form value validated with Zod, saved to store via saveChecklist, form reflects new persisted state, submitting empty template with no items succeeds, submitting with one category empty and others populated persists correctly) and reset (form reverts to store state, all unsaved changes discarded, form pristine after reset) in src/app/checklist/checklist.page.spec.ts
 
 ### Implementation for User Story 4
 
-- [ ] T017 [US4] Implement submit button: read form value, validate with ChecklistItemSchema, call store.saveChecklist() in src/app/checklist/checklist.page.ts and checklist.page.html
-- [ ] T018 [US4] Implement reset button: re-read store categories computed, rebuild FormArrays, mark form pristine in src/app/checklist/checklist.page.ts and checklist.page.html
+- [x] T017 [US4] Implement submit button: read form value, validate with ChecklistItemSchema, call store.saveChecklist() in src/app/checklist/checklist.page.ts and checklist.page.html
+- [x] T018 [US4] Implement reset button: re-read store categories computed, rebuild FormArrays, mark form pristine in src/app/checklist/checklist.page.ts and checklist.page.html
 
 **Checkpoint**: Full editing lifecycle complete. Submit persists, reset reverts. All user stories independently functional.
 
@@ -136,9 +136,9 @@ description: "Task list for checklist items template management feature"
 
 **Purpose**: Accessibility, validation, and quality gate verification
 
-- [ ] T019 [P] Verify accessibility: run AXE checks on checklist page, verify keyboard navigation through all interactive elements, confirm ARIA labels are present on all buttons and inputs in src/app/checklist/category-group/category-group.ts and src/app/checklist/checklist.page.ts
-- [ ] T020 Run quickstart.md validation scenarios (all 7 scenarios) to verify end-to-end feature correctness; additionally verify SC-005 by pre-loading store with 30 items and confirming page renders in under 1 second; manually verify SC-001 (add item completes in under 5 seconds) and SC-002 (drag reorder completes in under 3 seconds with visual feedback under 100ms)
-- [ ] T021 [P] Run ng build and verify all quality gates pass (bundle size < 500kB warning, component styles < 4kB, no any types, Prettier formatted)
+- [x] T019 [P] Verify accessibility: run AXE checks on checklist page, verify keyboard navigation through all interactive elements, confirm ARIA labels are present on all buttons and inputs in src/app/checklist/category-group/category-group.ts and src/app/checklist/checklist.page.ts
+- [x] T020 Run quickstart.md validation scenarios (all 7 scenarios) to verify end-to-end feature correctness; additionally verify SC-005 by pre-loading store with 30 items and confirming page renders in under 1 second; manually verify SC-001 (add item completes in under 5 seconds) and SC-002 (drag reorder completes in under 3 seconds with visual feedback under 100ms)
+- [x] T021 [P] Run ng build and verify all quality gates pass (bundle size < 500kB warning, component styles < 4kB, no any types, Prettier formatted)
 
 ---
 

@@ -1,0 +1,64 @@
+<section [attr.aria-label]="category() + ' checklist items'">
+  <h3>{{ category() }}</h3>
+
+  @if (formArray().length === 0) {
+    <p data-testid="empty-state">No items in this category.</p>
+  }
+
+  <ul
+    cdkDropList
+    [attr.aria-label]="category() + ' items list'"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    @for (group of formArray().controls; track group.get('id')?.value; let i = $index; let first = $first; let last = $last) {
+      <li data-testid="checklist-item" cdkDrag>
+        <button
+          type="button"
+          data-testid="move-up-btn"
+          [attr.aria-label]="'Move ' + group.get('label')?.value + ' up'"
+          [disabled]="first"
+          (click)="moveUp(i)"
+        >
+          &uarr;
+        </button>
+        <button
+          type="button"
+          data-testid="move-down-btn"
+          [attr.aria-label]="'Move ' + group.get('label')?.value + ' down'"
+          [disabled]="last"
+          (click)="moveDown(i)"
+        >
+          &darr;
+        </button>
+        <span>{{ group.get('label')?.value }}</span>
+        <button
+          type="button"
+          data-testid="delete-item-btn"
+          [attr.aria-label]="'Delete ' + group.get('label')?.value"
+          (click)="deleteItem(i)"
+        >
+          Delete
+        </button>
+      </li>
+    }
+  </ul>
+
+  <div class="add-item">
+    <input
+      type="text"
+      data-testid="add-item-input"
+      [attr.aria-label]="'New item for ' + category()"
+      [value]="newItemLabel()"
+      (input)="onInputChange($event)"
+      (keydown.enter)="addItem()"
+    />
+    <button
+      type="button"
+      data-testid="add-item-btn"
+      [attr.aria-label]="'Add item to ' + category()"
+      (click)="addItem()"
+    >
+      Add
+    </button>
+  </div>
+</section>
