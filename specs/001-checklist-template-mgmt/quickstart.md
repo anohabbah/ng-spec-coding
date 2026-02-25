@@ -77,6 +77,6 @@ This runs all Vitest specs including the checklist template feature tests.
 | `src/app/checklist/checklist.model.ts`               | Types, interfaces, Zod schemas         |
 | `src/app/checklist/checklist.store.ts`               | NgRx SignalStore with entities feature |
 | `src/app/checklist/checklist.routes.ts`              | Lazy-loaded feature routes             |
-| `src/app/checklist/checklist-page.ts`                | Page component                         |
+| `src/app/checklist/checklist.page.ts`                | Page component                         |
 | `src/app/checklist/category-group/category-group.ts` | Category group component               |
 | `src/app/app.routes.ts`                              | Root routes (lazy-loads feature)       |

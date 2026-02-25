@@ -29,14 +29,14 @@ A single task entry within a category.
 | id       | string | Unique identifier; auto-generated                      |
 | label    | string | Non-empty; user-provided text                          |
 | position | number | Non-negative integer; derived from array index on save |
-| category | string | Non-empty; Fixed category                              |
+| category | Category | One of MORNING, EVENING, NIGHT; fixed enum             |
 
 **Validation rules**:
 
-- `id`: Must be a non-empty string. Generated at creation time (UUID or similar).
+- `id`: Must be a non-empty string. Generated at creation time via `crypto.randomUUID()`.
 - `label`: Must be a non-empty, trimmed string. Leading/trailing whitespace is stripped before save.
 - `position`: Non-negative integer. Derived from the item's index within its category FormArray when converting form state to store entities on submit.
-- `category`: Must be a non-empty, trimmed string. Fixed known category.
+- `category`: Must be one of the `Category` enum values (MORNING, EVENING, NIGHT).
 
 ## Relationships
 

@@ -177,6 +177,13 @@ guidelines and MUST be followed in all code:
 - `NgOptimizedImage` does not work for inline base64 images; use
   standard `<img>` tags for those
 
+### File Naming
+
+- Page components MUST use the `.page.` infix
+  (e.g., `feature.page.ts`, `feature.page.html`, `feature.page.spec.ts`)
+- Child/shared components keep the default hyphenated name
+  (e.g., `category-group.ts`)
+
 ### Routing
 
 - Implement lazy loading for all feature routes
