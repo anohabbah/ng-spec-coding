@@ -17,8 +17,8 @@ A user navigates to the checklist template management page. If a checklist items
 
 **Acceptance Scenarios**:
 
-1. **Given** a checklist template exists with items in MORNING and EVENING categories, **When** the user navigates to the management page, **Then** the page displays the MORNING items and EVENING items under their respective category headings in saved order, and the NIGHT category is displayed as an empty group.
-2. **Given** no checklist template exists, **When** the user navigates to the management page, **Then** the page displays three empty category groups (MORNING, EVENING, NIGHT) with the ability to add items to each.
+1. **Given** a checklist items template exists with items in MORNING and EVENING categories, **When** the user navigates to the management page, **Then** the page displays the MORNING items and EVENING items under their respective category headings in saved order, and the NIGHT category is displayed as an empty group.
+2. **Given** no checklist items template exists, **When** the user navigates to the management page, **Then** the page displays three empty category groups (MORNING, EVENING, NIGHT) with the ability to add items to each.
 
 ---
 

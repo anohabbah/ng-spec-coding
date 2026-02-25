@@ -57,6 +57,7 @@ src/app/
 │   ├── checklist.model.ts        # Types, interfaces, Zod schemas
 │   ├── checklist.routes.ts       # Lazy-loaded feature routes
 │   ├── checklist.store.ts        # NgRx SignalStore with entities feature
+│   ├── checklist.store.spec.ts   # Store tests
 │   ├── checklist.page.ts     # Page component (form host)
 │   ├── checklist.page.html   # Page template
 │   ├── checklist.page.css    # Page styles

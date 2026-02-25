@@ -121,7 +121,7 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T016 [US4] Write failing tests for submit (form value validated with Zod, saved to store via saveChecklist, form reflects new persisted state, submitting empty template with no items succeeds) and reset (form reverts to store state, all unsaved changes discarded, form pristine after reset) in src/app/checklist/checklist.page.spec.ts
+- [ ] T016 [US4] Write failing tests for submit (form value validated with Zod, saved to store via saveChecklist, form reflects new persisted state, submitting empty template with no items succeeds, submitting with one category empty and others populated persists correctly) and reset (form reverts to store state, all unsaved changes discarded, form pristine after reset) in src/app/checklist/checklist.page.spec.ts
 
 ### Implementation for User Story 4
 
@@ -158,7 +158,7 @@ description: "Task list for checklist items template management feature"
 
 - **User Story 1 (P1)**: Depends on Foundational (Phase 2) only — can start immediately after store
 - **User Story 2 (P2)**: Depends on US1 (needs category-group and page components to exist)
-- **User Story 3 (P3)**: Depends on US2 (needs items in the list to reorder)
+- **User Story 3 (P3)**: Depends on US2 (shared file edits on category-group.ts)
 - **User Story 4 (P4)**: Depends on US1 (needs form and store connection); can run in parallel with US2/US3
 
 ### Within Each User Story

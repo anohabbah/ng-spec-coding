@@ -23,7 +23,7 @@ Navigate to `http://localhost:4200/checklist` to access the checklist items temp
 ng test
 ```
 
-This runs all Vitest specs including the checklist template feature tests.
+This runs all Vitest specs including the checklist items template feature tests.
 
 ## Verify the Feature
 
