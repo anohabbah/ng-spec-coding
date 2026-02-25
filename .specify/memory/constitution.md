@@ -1,22 +1,21 @@
 <!--
   Sync Impact Report
   ==================
-  Version change: 1.0.0 → 1.1.0
+  Version change: 1.1.0 → 1.2.0
 
   Modified principles:
-    - I. Component-First → expanded with input()/output() functions,
-      OnPush change detection, inline templates, Reactive forms,
-      standalone default rule
-    - II. Type Safety → added type inference preference
-    - IV. Signal-First State → added computed(), mutate prohibition,
-      pure transformation requirement
+    - VI. Accessibility → expanded with @angular/aria directive
+      requirements for custom interactive components
 
   Added sections:
-    - VI. Accessibility (new principle)
-    - Angular Conventions (new section: templates, services,
-      host bindings, images, routing)
+    - Angular Conventions > Accessibility (new subsection with
+      @angular/aria usage conventions)
 
   Removed sections: N/A
+
+  Modified sections:
+    - Technology Stack → added @angular/aria
+    - Quality Gates → added WAI-ARIA keyboard interaction gate
 
   Templates requiring updates:
     - .specify/templates/plan-template.md ✅ no changes needed
@@ -26,9 +25,10 @@
     - .specify/templates/tasks-template.md ✅ no changes needed
       (no hardcoded principle references)
     - .specify/templates/commands/*.md ✅ no command files exist yet
-    - guidelines.md ✅ source of truth for this amendment, no changes
 
-  Follow-up TODOs: None
+  Follow-up TODOs:
+    - Move @angular/aria from devDependencies to dependencies in
+      package.json (it is a runtime dependency, not dev-only)
 -->
 
 # Angular Sample Constitution
@@ -127,10 +127,21 @@ All UI MUST be accessible by default:
   contrast, and ARIA attributes
 - Accessibility MUST be verified during development, not deferred to
   a later phase
+- Custom interactive components MUST use `@angular/aria` directives
+  to implement WAI-ARIA patterns (keyboard navigation, focus
+  management, ARIA attributes, screen reader announcements)
+- When Angular Material provides a suitable component, prefer it over
+  building a custom `@angular/aria`-based component (Material
+  components already include full accessibility support)
+- When neither Material nor native HTML elements meet the
+  requirement, `@angular/aria` directives MUST be used instead of
+  manually implementing ARIA attributes and keyboard handlers
 
 **Rationale**: Accessibility is a fundamental quality attribute, not
-an afterthought. Building it in from the start is cheaper than
-retrofitting and ensures all users can interact with the application.
+an afterthought. `@angular/aria` provides headless, WAI-ARIA-compliant
+directives that handle complex keyboard interactions, focus management,
+and screen reader support—eliminating the need for error-prone manual
+ARIA implementation.
 
 ## Angular Conventions
 
@@ -170,10 +181,24 @@ guidelines and MUST be followed in all code:
 
 - Implement lazy loading for all feature routes
 
+### Accessibility
+
+- Import `@angular/aria` directives from their specific subpackages
+  (e.g., `@angular/aria/toolbar`, `@angular/aria/tabs`,
+  `@angular/aria/listbox`)
+- Use `@angular/aria` directives for these interactive patterns when
+  building custom components: Listbox, Select, Combobox, Autocomplete,
+  Tabs, Accordion, Tree, Grid, Toolbar, Menu, Menubar
+- Do NOT manually implement keyboard navigation or ARIA attributes
+  for patterns that `@angular/aria` already covers
+- Apply directives to standard HTML elements or custom component host
+  elements—`@angular/aria` is headless and does not impose styling
+
 ## Technology Stack
 
 - **Framework**: Angular 21+ with standalone components
 - **UI**: Angular Material + Tailwind CSS 4
+- **Accessibility**: @angular/aria (headless WAI-ARIA directives)
 - **State**: NgRx Signals + ngrx-toolkit
 - **Validation**: Zod 4
 - **Testing**: Vitest 4 with jsdom
@@ -192,7 +217,9 @@ All code MUST pass these gates before merging:
 
 - **Build**: `ng build` MUST complete without errors
 - **Tests**: `ng test` MUST pass with no failures
-- **Accessibility**: MUST pass AXE checks; MUST meet WCAG AA minimums
+- **Accessibility**: MUST pass AXE checks; MUST meet WCAG AA minimums;
+  custom interactive components MUST use `@angular/aria` directives
+  for keyboard navigation and focus management
 - **Bundle Size**: Initial bundle MUST stay under 500kB warning /
   1MB error threshold
 - **Component Styles**: Any component style MUST stay under 4kB
@@ -227,4 +254,4 @@ architectural choices MUST comply with these principles.
 - Complexity violations MUST be justified before approval
 - Quarterly review of constitution relevance is RECOMMENDED
 
-**Version**: 1.1.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-25
+**Version**: 1.2.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-25
