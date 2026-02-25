@@ -11,7 +11,7 @@ Build a checklist items template management page as an Angular dynamic Reactive 
 
 **Language/Version**: TypeScript 5.9+ / Angular 21.1
 **Primary Dependencies**: Angular Material 21.1, Angular CDK 21.1 (drag-drop), NgRx Signals 21.0, ngrx-toolkit 0.1, Zod 4, Tailwind CSS 4
-**Storage**: NgRx SignalStore (in-memory; no backend persistence)
+**Storage**: NgRx SignalStore with ngrx-toolkit `withStorageSync()` for localStorage persistence (no backend)
 **Testing**: Vitest 4 with jsdom
 **Target Platform**: Web (modern browsers)
 **Project Type**: Single-page web application

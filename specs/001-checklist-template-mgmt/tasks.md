@@ -36,11 +36,11 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category, totalItems sums all items, isEmpty returns true when no items) in src/app/checklist/checklist.store.spec.ts
+- [ ] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category sorted by position ascending, totalItems sums all items, isEmpty returns true when no items, store state survives simulated reload via localStorage round-trip) in src/app/checklist/checklist.store.spec.ts
 
 ### Implementation for Store
 
-- [ ] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories, totalItems, isEmpty) in src/app/checklist/checklist.store.ts
+- [ ] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories grouping entities by category and sorting by position ascending, totalItems, isEmpty), and withStorageSync({ key: 'checklistTemplate', autoSync: true }) from ngrx-toolkit for localStorage persistence in src/app/checklist/checklist.store.ts
 
 **Checkpoint**: Store ready — user story implementation can now begin
 
@@ -78,13 +78,13 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T009 [P] [US2] Write failing tests for add item (appends FormGroup to FormArray, generates id, empty label shows validation error and prevents add) and delete item (removes FormGroup from FormArray at correct index) in src/app/checklist/category-group/category-group.spec.ts
+- [ ] T009 [P] [US2] Write failing tests for add item (appends FormGroup to FormArray, generates id, empty label shows validation error and prevents add, whitespace-only label shows validation error and prevents add) and delete item (removes FormGroup from FormArray at correct index) in src/app/checklist/category-group/category-group.spec.ts
 - [ ] T010 [P] [US2] Write failing test verifying store is unchanged after add/delete before submit in src/app/checklist/checklist.page.spec.ts
 
 ### Implementation for User Story 2
 
 - [ ] T011 [US2] Add item input field with required Validators.required and aria-label, add button with aria-label, and per-item delete button with aria-label to category-group component in src/app/checklist/category-group/category-group.ts and category-group.html
-- [ ] T012 [US2] Wire add logic (generate id via crypto.randomUUID(), push FormGroup to FormArray, clear input) and delete logic (removeAt index from FormArray) in category-group component in src/app/checklist/category-group/category-group.ts
+- [ ] T012 [US2] Wire add logic (generate id via crypto.randomUUID(), trim label before validation, push FormGroup to FormArray, clear input) and delete logic (removeAt index from FormArray) in category-group component in src/app/checklist/category-group/category-group.ts
 
 **Checkpoint**: Users can add and delete items within each category. Validation prevents empty labels. Store unchanged until submit.
 

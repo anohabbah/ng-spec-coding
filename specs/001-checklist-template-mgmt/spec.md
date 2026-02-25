@@ -83,7 +83,7 @@ A user submits the current form state to persist all changes (additions, deletio
 - **FR-001**: The page MUST display checklist items grouped under three fixed categories: MORNING, EVENING, and NIGHT.
 - **FR-002**: Each category MUST display its items in the persisted order.
 - **FR-003**: The user MUST be able to add a new item with a text label to any category.
-- **FR-004**: A new item's label MUST be non-empty; the form MUST show a validation error for empty labels.
+- **FR-004**: A new item's label MUST be non-empty after trimming leading and trailing whitespace; the form MUST show a validation error for empty or whitespace-only labels.
 - **FR-005**: The user MUST be able to delete any item from any category.
 - **FR-006**: The user MUST be able to reorder items within a category via drag-and-drop or up/down buttons.
 - **FR-007**: Reordering MUST be restricted to within a single category; cross-category moves are not allowed.
@@ -113,6 +113,6 @@ A user submits the current form state to persist all changes (additions, deletio
 
 - **SC-001**: Users can add a new checklist item to any category in under 5 seconds.
 - **SC-002**: Users can reorder items within a category in under 3 seconds via drag-and-drop.
-- **SC-003**: After submitting, a page refresh displays the submitted data accurately with no data loss.
+- **SC-003**: After submitting, a page refresh displays the submitted data accurately with no data loss. Persistence uses browser localStorage (no backend).
 - **SC-004**: After resetting, the form matches the last submitted state exactly, with zero residual unsaved changes.
 - **SC-005**: The page loads and displays an existing template with up to 30 items total in under 1 second.
