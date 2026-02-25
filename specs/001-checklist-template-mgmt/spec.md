@@ -112,7 +112,7 @@ A user submits the current form state to persist all changes (additions, deletio
 ### Measurable Outcomes
 
 - **SC-001**: Users can add a new checklist item to any category in under 5 seconds.
-- **SC-002**: Users can reorder items within a category in under 3 seconds via drag-and-drop.
+- **SC-002**: Users can reorder items within a category in under 3 seconds via drag-and-drop. Visual feedback (item movement) MUST appear within 100ms of the drag gesture.
 - **SC-003**: After submitting, a page refresh displays the submitted data accurately with no data loss. Persistence uses browser localStorage (no backend).
 - **SC-004**: After resetting, the form matches the last submitted state exactly, with zero residual unsaved changes.
 - **SC-005**: The page loads and displays an existing template with up to 30 items total in under 1 second.

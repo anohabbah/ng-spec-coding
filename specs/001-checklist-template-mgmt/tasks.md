@@ -36,11 +36,11 @@ description: "Task list for checklist items template management feature"
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category sorted by position ascending, totalItems sums all items, isEmpty returns true when no items, store state survives simulated reload via localStorage round-trip) in src/app/checklist/checklist.store.spec.ts
+- [ ] T003 Write failing tests for ChecklistStore (saveChecklist persists entities, categories computed groups items by category sorted by position ascending, totalItems sums all items, isEmpty returns true when no items, store state survives simulated reload via localStorage round-trip, corrupted localStorage data is discarded and store initializes empty) in src/app/checklist/checklist.store.spec.ts
 
 ### Implementation for Store
 
-- [ ] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories grouping entities by category and sorting by position ascending, totalItems, isEmpty), and withStorageSync({ key: 'checklistTemplate', autoSync: true }) from ngrx-toolkit for localStorage persistence in src/app/checklist/checklist.store.ts
+- [ ] T004 Implement ChecklistStore using signalStore() with withEntities(), withMethods(saveChecklist), withComputed(categories grouping entities by category and sorting by position ascending, totalItems, isEmpty), and withStorageSync({ key: 'checklistTemplate', autoSync: true }) from ngrx-toolkit for localStorage persistence; validate hydrated data with Zod safeParse on restore (discard and start empty if invalid) in src/app/checklist/checklist.store.ts
 
 **Checkpoint**: Store ready — user story implementation can now begin
 
@@ -137,7 +137,7 @@ description: "Task list for checklist items template management feature"
 **Purpose**: Accessibility, validation, and quality gate verification
 
 - [ ] T019 [P] Verify accessibility: run AXE checks on checklist page, verify keyboard navigation through all interactive elements, confirm ARIA labels are present on all buttons and inputs in src/app/checklist/category-group/category-group.ts and src/app/checklist/checklist.page.ts
-- [ ] T020 Run quickstart.md validation scenarios (all 7 scenarios) to verify end-to-end feature correctness; additionally verify SC-005 by pre-loading store with 30 items and confirming page renders in under 1 second
+- [ ] T020 Run quickstart.md validation scenarios (all 7 scenarios) to verify end-to-end feature correctness; additionally verify SC-005 by pre-loading store with 30 items and confirming page renders in under 1 second; manually verify SC-001 (add item completes in under 5 seconds) and SC-002 (drag reorder completes in under 3 seconds with visual feedback under 100ms)
 - [ ] T021 [P] Run ng build and verify all quality gates pass (bundle size < 500kB warning, component styles < 4kB, no any types, Prettier formatted)
 
 ---
