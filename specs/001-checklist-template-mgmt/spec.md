@@ -2,7 +2,7 @@
 
 **Feature Branch**: `001-checklist-template-mgmt`
 **Created**: 2026-02-25
-**Status**: Draft
+**Status**: Implemented
 **Input**: User description: "Create a checklist items template management page with dynamic form, 3 categories (MORNING, EVENING, NIGHT), CRUD operations, ordering, reset/submit, and NgRx Signals store as source of truth."
 
 ## User Scenarios & Testing *(mandatory)*

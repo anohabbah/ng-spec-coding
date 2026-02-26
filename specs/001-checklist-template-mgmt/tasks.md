@@ -142,6 +142,19 @@ description: "Task list for checklist items template management feature"
 
 ---
 
+## Phase 8: Constitution v1.3.0 Compliance — FormBuilder Refactoring
+
+**Purpose**: Align reactive forms construction with constitution Principle I FormBuilder convention (added in v1.3.0)
+
+- [x] T022 [P] Refactor checklist.page.ts to use inject(FormBuilder) with fb.group(), fb.array(), and fb.nonNullable.group() replacing all manual new FormGroup()/FormArray()/FormControl() instantiation in src/app/checklist/checklist.page.ts
+- [x] T023 [P] Refactor category-group.ts to use inject(FormBuilder) with fb.nonNullable.group() replacing manual new FormGroup()/FormControl() in addItem() in src/app/checklist/category-group/category-group.ts
+- [x] T024 [P] Refactor test files to use TestBed.inject(FormBuilder) replacing all manual form construction in src/app/checklist/checklist.page.spec.ts and src/app/checklist/category-group/category-group.spec.ts
+- [x] T025 Run ng test and ng build to verify all quality gates still pass after refactoring
+
+**Checkpoint**: All reactive forms construction uses FormBuilder. Constitution v1.3.0 Principle I fully satisfied.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies

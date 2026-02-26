@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { ChecklistPage } from './checklist.page';
 import { ChecklistStore } from './checklist.store';
 import { Category, ChecklistItem } from './checklist.model';
@@ -17,6 +18,7 @@ describe('ChecklistPage', () => {
   let fixture: ComponentFixture<ChecklistPage>;
   let component: ChecklistPage;
   let store: InstanceType<typeof ChecklistStore>;
+  let fb: FormBuilder;
 
   beforeEach(async () => {
     localStorage.clear();
@@ -26,6 +28,7 @@ describe('ChecklistPage', () => {
     }).compileComponents();
 
     store = TestBed.inject(ChecklistStore);
+    fb = TestBed.inject(FormBuilder);
     fixture = TestBed.createComponent(ChecklistPage);
     component = fixture.componentInstance;
   });
@@ -94,12 +97,7 @@ describe('ChecklistPage', () => {
       // Modify the form (add an item to MORNING FormArray)
       const morningArray = component.getFormArray(Category.MORNING);
       morningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('new-id', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('New item', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'new-id', label: 'New item' }),
       );
 
       // Store should still have only original item
@@ -116,12 +114,7 @@ describe('ChecklistPage', () => {
       // Add items to the form
       const morningArray = component.getFormArray(Category.MORNING);
       morningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('id-1', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Wake up', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'id-1', label: 'Wake up' }),
       );
 
       component.submit();
@@ -137,12 +130,7 @@ describe('ChecklistPage', () => {
 
       const morningArray = component.getFormArray(Category.MORNING);
       morningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('id-1', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Submitted item', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'id-1', label: 'Submitted item' }),
       );
 
       component.submit();
@@ -168,22 +156,12 @@ describe('ChecklistPage', () => {
 
       const morningArray = component.getFormArray(Category.MORNING);
       morningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('id-1', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Morning item', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'id-1', label: 'Morning item' }),
       );
 
       const nightArray = component.getFormArray(Category.NIGHT);
       nightArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('id-2', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Night item', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'id-2', label: 'Night item' }),
       );
 
       component.submit();
@@ -205,12 +183,7 @@ describe('ChecklistPage', () => {
       // Add an unsaved item
       const morningArray = component.getFormArray(Category.MORNING);
       morningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('unsaved', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Unsaved', {
-            nonNullable: true,
-          }),
-        }),
+        fb.nonNullable.group({ id: 'unsaved', label: 'Unsaved' }),
       );
 
       expect(morningArray.length).toBe(2);
@@ -228,10 +201,7 @@ describe('ChecklistPage', () => {
       // Add item without submitting
       const eveningArray = component.getFormArray(Category.EVENING);
       eveningArray.push(
-        new (await import('@angular/forms')).FormGroup({
-          id: new (await import('@angular/forms')).FormControl('tmp', { nonNullable: true }),
-          label: new (await import('@angular/forms')).FormControl('Temp', { nonNullable: true }),
-        }),
+        fb.nonNullable.group({ id: 'tmp', label: 'Temp' }),
       );
 
       component.reset();

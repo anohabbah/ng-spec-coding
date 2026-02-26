@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
-import { FormArray, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
+import { type FormControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Category } from '../checklist.model';
 
@@ -13,6 +13,7 @@ import { Category } from '../checklist.model';
 export class CategoryGroup {
   readonly category = input.required<Category>();
   readonly formArray = input.required<FormArray<FormGroup<{ id: FormControl<string>; label: FormControl<string> }>>>();
+  private readonly fb = inject(FormBuilder);
 
   readonly newItemLabel = signal('');
 
@@ -22,9 +23,9 @@ export class CategoryGroup {
       return;
     }
 
-    const group = new FormGroup({
-      id: new FormControl(crypto.randomUUID() as string, { nonNullable: true }),
-      label: new FormControl(label, { nonNullable: true }),
+    const group = this.fb.nonNullable.group({
+      id: crypto.randomUUID() as string,
+      label: label,
     });
 
     this.formArray().push(group);

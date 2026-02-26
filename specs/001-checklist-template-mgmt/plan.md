@@ -25,7 +25,7 @@ Build a checklist items template management page as an Angular dynamic Reactive 
 
 | Principle              | Gate                                                                                                                         | Status |
 |------------------------|------------------------------------------------------------------------------------------------------------------------------|--------|
-| I. Component-First     | Page component + category-group child component, each standalone with `input()`/`output()`, OnPush, Reactive forms           | PASS   |
+| I. Component-First     | Page component + category-group child component, each standalone with `input()`/`output()`, OnPush, Reactive forms with `FormBuilder` (v1.3.0) | PASS   |
 | II. Type Safety        | Strict TS, Zod schema for template validation, typed interfaces for all entities                                             | PASS   |
 | III. Test-First        | Vitest specs written before implementation for store, page component, and category-group component                           | PASS   |
 | IV. Signal-First State | NgRx SignalStore as single source of truth; `computed()` for derived state; no `mutate`                                      | PASS   |

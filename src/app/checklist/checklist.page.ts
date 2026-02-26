@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChecklistStore } from './checklist.store';
 import { CATEGORIES, Category, ChecklistItem, ChecklistItemSchema } from './checklist.model';
 import { CategoryGroup } from './category-group/category-group';
@@ -14,11 +14,12 @@ import { CategoryGroup } from './category-group/category-group';
 export class ChecklistPage implements OnInit {
   readonly store = inject(ChecklistStore);
   readonly categories = CATEGORIES;
+  private readonly fb = inject(FormBuilder);
 
-  form = new FormGroup({
-    MORNING: new FormArray<FormGroup>([]),
-    EVENING: new FormArray<FormGroup>([]),
-    NIGHT: new FormArray<FormGroup>([]),
+  form = this.fb.group({
+    MORNING: this.fb.array<FormGroup>([]),
+    EVENING: this.fb.array<FormGroup>([]),
+    NIGHT: this.fb.array<FormGroup>([]),
   });
 
   ngOnInit(): void {
@@ -68,9 +69,9 @@ export class ChecklistPage implements OnInit {
   }
 
   private createItemGroup(item: ChecklistItem): FormGroup {
-    return new FormGroup({
-      id: new FormControl(item.id, { nonNullable: true }),
-      label: new FormControl(item.label, { nonNullable: true }),
+    return this.fb.nonNullable.group({
+      id: item.id,
+      label: item.label,
     });
   }
 }

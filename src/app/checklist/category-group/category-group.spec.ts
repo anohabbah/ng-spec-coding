@@ -1,19 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryGroup } from './category-group';
 import { Category } from '../checklist.model';
 import { Component, viewChild } from '@angular/core';
 
-function buildFormArray(items: { id: string; label: string }[]): FormArray<FormGroup> {
-  return new FormArray(
-    items.map(
-      (item) =>
-        new FormGroup({
-          id: new FormControl(item.id, { nonNullable: true }),
-          label: new FormControl(item.label, { nonNullable: true }),
-        }),
-    ),
-  );
+function buildFormArray(fb: FormBuilder, items: { id: string; label: string }[]): FormArray<FormGroup> {
+  return fb.array(
+    items.map((item) => fb.nonNullable.group({ id: item.id, label: item.label })),
+  ) as FormArray<FormGroup>;
 }
 
 @Component({
@@ -22,25 +16,27 @@ function buildFormArray(items: { id: string; label: string }[]): FormArray<FormG
 })
 class TestHost {
   category: Category = Category.MORNING;
-  formArray = buildFormArray([]);
+  formArray = new FormArray<FormGroup>([]);
   readonly categoryGroup = viewChild.required(CategoryGroup);
 }
 
 describe('CategoryGroup', () => {
   let fixture: ComponentFixture<TestHost>;
   let host: TestHost;
+  let fb: FormBuilder;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TestHost],
     }).compileComponents();
+    fb = TestBed.inject(FormBuilder);
     fixture = TestBed.createComponent(TestHost);
     host = fixture.componentInstance;
   });
 
   describe('US1: View mode', () => {
     it('should render items from FormArray', async () => {
-      host.formArray = buildFormArray([
+      host.formArray = buildFormArray(fb, [
         { id: '1', label: 'Wake up' },
         { id: '2', label: 'Shower' },
       ]);
@@ -61,7 +57,7 @@ describe('CategoryGroup', () => {
     });
 
     it('should show empty state message when no items', async () => {
-      host.formArray = buildFormArray([]);
+      host.formArray = buildFormArray(fb, []);
       fixture.detectChanges();
       await fixture.whenStable();
 
@@ -70,7 +66,7 @@ describe('CategoryGroup', () => {
     });
 
     it('should not show empty state when items exist', async () => {
-      host.formArray = buildFormArray([{ id: '1', label: 'Item' }]);
+      host.formArray = buildFormArray(fb, [{ id: '1', label: 'Item' }]);
       fixture.detectChanges();
       await fixture.whenStable();
 
@@ -81,7 +77,7 @@ describe('CategoryGroup', () => {
 
   describe('US2: Add and delete items', () => {
     beforeEach(async () => {
-      host.formArray = buildFormArray([{ id: '1', label: 'Existing item' }]);
+      host.formArray = buildFormArray(fb, [{ id: '1', label: 'Existing item' }]);
       fixture.detectChanges();
       await fixture.whenStable();
     });
@@ -156,10 +152,7 @@ describe('CategoryGroup', () => {
     it('should remove FormGroup from FormArray at correct index on delete', async () => {
       // Add a second item to the existing formArray
       host.formArray.push(
-        new FormGroup({
-          id: new FormControl('2', { nonNullable: true }),
-          label: new FormControl('Second', { nonNullable: true }),
-        }),
+        fb.nonNullable.group({ id: '2', label: 'Second' }),
       );
       fixture.detectChanges();
       await fixture.whenStable();
@@ -180,7 +173,7 @@ describe('CategoryGroup', () => {
 
   describe('US3: Reorder items', () => {
     beforeEach(async () => {
-      host.formArray = buildFormArray([
+      host.formArray = buildFormArray(fb, [
         { id: '1', label: 'First' },
         { id: '2', label: 'Second' },
         { id: '3', label: 'Third' },
