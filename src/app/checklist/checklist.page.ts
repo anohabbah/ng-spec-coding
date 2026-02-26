@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { ChecklistStore } from './checklist.store';
 import { CATEGORIES, Category, ChecklistItem, ChecklistItemSchema } from './checklist.model';
 import { CategoryGroup } from './category-group/category-group';
@@ -8,7 +9,7 @@ import { CategoryGroup } from './category-group/category-group';
   selector: 'app-checklist-page',
   templateUrl: './checklist.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, CategoryGroup],
+  imports: [ReactiveFormsModule, CategoryGroup, MatButton],
   host: { class: 'block max-w-[800px] mx-auto py-6 px-4' },
 })
 export class ChecklistPage implements OnInit {

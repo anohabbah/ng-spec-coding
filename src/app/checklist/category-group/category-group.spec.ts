@@ -4,7 +4,10 @@ import { CategoryGroup } from './category-group';
 import { Category } from '../checklist.model';
 import { Component, viewChild } from '@angular/core';
 
-function buildFormArray(fb: FormBuilder, items: { id: string; label: string }[]): FormArray<FormGroup> {
+function buildFormArray(
+  fb: FormBuilder,
+  items: { id: string; label: string }[],
+): FormArray<FormGroup> {
   return fb.array(
     items.map((item) => fb.nonNullable.group({ id: item.id, label: item.label })),
   ) as FormArray<FormGroup>;
@@ -52,7 +55,7 @@ describe('CategoryGroup', () => {
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const heading = fixture.nativeElement.querySelector('h2, h3, [role="heading"]');
+      const heading = fixture.nativeElement.querySelector('mat-card-title');
       expect(heading?.textContent).toContain('EVENING');
     });
 
@@ -151,17 +154,13 @@ describe('CategoryGroup', () => {
 
     it('should remove FormGroup from FormArray at correct index on delete', async () => {
       // Add a second item to the existing formArray
-      host.formArray.push(
-        fb.nonNullable.group({ id: '2', label: 'Second' }),
-      );
+      host.formArray.push(fb.nonNullable.group({ id: '2', label: 'Second' }));
       fixture.detectChanges();
       await fixture.whenStable();
 
       expect(host.formArray.length).toBe(2);
 
-      const deleteBtns = fixture.nativeElement.querySelectorAll(
-        '[data-testid="delete-item-btn"]',
-      );
+      const deleteBtns = fixture.nativeElement.querySelectorAll('[data-testid="delete-item-btn"]');
       deleteBtns[0].click();
       fixture.detectChanges();
       await fixture.whenStable();

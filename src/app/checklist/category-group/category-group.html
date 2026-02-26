@@ -1,65 +1,80 @@
-<section [attr.aria-label]="category() + ' checklist items'">
-  <h3>{{ category() }}</h3>
-
-  @if (formArray().length === 0) {
-    <p data-testid="empty-state">No items in this category.</p>
-  }
-
-  <ul
-    class="list-none p-0 m-0"
-    cdkDropList
-    [attr.aria-label]="category() + ' items list'"
-    (cdkDropListDropped)="onDrop($event)"
-  >
-    @for (group of formArray().controls; track group.get('id')?.value; let i = $index; let first = $first; let last = $last) {
-      <li class="flex items-center gap-2 py-2" data-testid="checklist-item" cdkDrag>
-        <button
-          type="button"
-          data-testid="move-up-btn"
-          [attr.aria-label]="'Move ' + group.get('label')?.value + ' up'"
-          [disabled]="first"
-          (click)="moveUp(i)"
-        >
-          &uarr;
-        </button>
-        <button
-          type="button"
-          data-testid="move-down-btn"
-          [attr.aria-label]="'Move ' + group.get('label')?.value + ' down'"
-          [disabled]="last"
-          (click)="moveDown(i)"
-        >
-          &darr;
-        </button>
-        <span>{{ group.get('label')?.value }}</span>
-        <button
-          type="button"
-          data-testid="delete-item-btn"
-          [attr.aria-label]="'Delete ' + group.get('label')?.value"
-          (click)="deleteItem(i)"
-        >
-          Delete
-        </button>
-      </li>
+<mat-card [attr.aria-label]="category() + ' checklist items'">
+  <mat-card-header>
+    <mat-card-title>{{ category() }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    @if (formArray().length === 0) {
+      <p data-testid="empty-state">No items in this category.</p>
     }
-  </ul>
 
-  <div class="add-item">
-    <input
-      type="text"
-      data-testid="add-item-input"
-      [attr.aria-label]="'New item for ' + category()"
-      [value]="newItemLabel()"
-      (input)="onInputChange($event)"
-      (keydown.enter)="addItem()"
-    />
-    <button
-      type="button"
-      data-testid="add-item-btn"
-      [attr.aria-label]="'Add item to ' + category()"
-      (click)="addItem()"
+    <mat-list
+      cdkDropList
+      [attr.aria-label]="category() + ' items list'"
+      (cdkDropListDropped)="onDrop($event)"
     >
-      Add
-    </button>
-  </div>
-</section>
+      @for (
+        group of formArray().controls;
+        track group.get('id')?.value;
+        let i = $index;
+        let first = $first;
+        let last = $last
+      ) {
+        <mat-list-item data-testid="checklist-item" cdkDrag>
+          <button
+            mat-icon-button
+            type="button"
+            data-testid="move-up-btn"
+            [attr.aria-label]="'Move ' + group.get('label')?.value + ' up'"
+            [disabled]="first"
+            (click)="moveUp(i)"
+          >
+            <mat-icon>arrow_upward</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            type="button"
+            data-testid="move-down-btn"
+            [attr.aria-label]="'Move ' + group.get('label')?.value + ' down'"
+            [disabled]="last"
+            (click)="moveDown(i)"
+          >
+            <mat-icon>arrow_downward</mat-icon>
+          </button>
+          <span>{{ group.get('label')?.value }}</span>
+          <button
+            mat-icon-button
+            type="button"
+            data-testid="delete-item-btn"
+            [attr.aria-label]="'Delete ' + group.get('label')?.value"
+            (click)="deleteItem(i)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      }
+    </mat-list>
+
+    <div class="flex items-center gap-2 mt-2">
+      <mat-form-field>
+        <mat-label>New item for {{ category() }}</mat-label>
+        <input
+          matInput
+          data-testid="add-item-input"
+          [attr.aria-label]="'New item for ' + category()"
+          [value]="newItemLabel()"
+          (input)="onInputChange($event)"
+          (keydown.enter)="addItem()"
+        />
+      </mat-form-field>
+      <button
+        mat-icon-button
+        type="button"
+        data-testid="add-item-btn"
+        [attr.aria-label]="'Add item to ' + category()"
+        (click)="addItem()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>
