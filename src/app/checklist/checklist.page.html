@@ -1,0 +1,28 @@
+<main aria-label="Checklist Template Management">
+  <h1 class="mb-6">Checklist Template</h1>
+
+  @for (cat of categories; track cat) {
+    <app-category-group [category]="cat" [formArray]="getFormArray(cat)" />
+  }
+
+  <div class="flex gap-4 mt-6">
+    <button
+      mat-raised-button
+      type="button"
+      data-testid="submit-btn"
+      aria-label="Submit changes"
+      (click)="submit()"
+    >
+      Submit
+    </button>
+    <button
+      mat-button
+      type="button"
+      data-testid="reset-btn"
+      aria-label="Reset changes"
+      (click)="reset()"
+    >
+      Reset
+    </button>
+  </div>
+</main>
