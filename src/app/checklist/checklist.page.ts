@@ -7,9 +7,9 @@ import { CategoryGroup } from './category-group/category-group';
 @Component({
   selector: 'app-checklist-page',
   templateUrl: './checklist.page.html',
-  styleUrl: './checklist.page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, CategoryGroup],
+  host: { class: 'block max-w-[800px] mx-auto py-6 px-4' },
 })
 export class ChecklistPage implements OnInit {
   readonly store = inject(ChecklistStore);
