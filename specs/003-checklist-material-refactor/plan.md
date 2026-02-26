@@ -19,7 +19,7 @@ CDK drag-drop integration must be preserved on the Material list. All existing a
 **Project Type**: Single-page web application
 **Performance Goals**: N/A (no performance-sensitive changes)
 **Constraints**: Initial bundle < 500 kB warning / 1 MB error; component styles < 4 kB warning / 8 kB error
-**Scale/Scope**: 2 components, 2 templates, 2 test files, 1 app config file
+**Scale/Scope**: 2 components, 2 templates, 2 test files
 
 ## Constitution Check
 
@@ -58,7 +58,7 @@ specs/003-checklist-material-refactor/
 ```text
 src/
 ├── app/
-│   ├── app.config.ts                          # Add provideAnimationsAsync()
+│   ├── app.config.ts                          # No changes (animations provider deprecated since Angular 20.2)
 │   └── checklist/
 │       ├── checklist.page.ts                  # Update imports (Material modules)
 │       ├── checklist.page.html                # Replace buttons with mat-button, wrap in mat-card
@@ -73,7 +73,7 @@ src/
 └── material-theme.scss                        # No changes (already configured M3 Azure/Blue)
 ```
 
-**Structure Decision**: Single-project Angular SPA. All changes are confined to the `src/app/checklist/` feature directory plus one line in `src/app/app.config.ts`. No new files created.
+**Structure Decision**: Single-project Angular SPA. All changes are confined to the `src/app/checklist/` feature directory. No new files created. (`app.config.ts` is NOT modified — `provideAnimationsAsync()` was deprecated in Angular 20.2 and Angular Material 21 handles animations internally.)
 
 ## Complexity Tracking
 

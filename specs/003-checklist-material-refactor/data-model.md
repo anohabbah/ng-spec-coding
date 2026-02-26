@@ -47,4 +47,4 @@ No new state transitions introduced. Existing transitions remain:
 | Component templates | Yes | HTML elements → Material components |
 | Component TypeScript | Yes | New Material module imports only |
 | Component tests | Yes | DOM query selectors updated for Material elements |
-| App config | Yes | Add `provideAnimationsAsync()` |
+| App config | No | `provideAnimationsAsync()` deprecated since Angular 20.2; Angular Material 21 handles animations internally |

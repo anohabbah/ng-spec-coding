@@ -23,7 +23,7 @@
 
 > **Update tests FIRST, verify they FAIL, then implement**
 
-- [ ] T002 [US1] Update CategoryGroup TestBed to import Material modules (`MatListModule`, `MatIconModule`, `MatButtonModule`, `MatFormFieldModule`, `MatInputModule`) and `provideAnimationsAsync()` in `src/app/checklist/category-group/category-group.spec.ts`
+- [ ] T002 [US1] Update CategoryGroup TestBed to import Material modules (`MatListModule`, `MatIconModule`, `MatButtonModule`, `MatFormFieldModule`, `MatInputModule`) in `src/app/checklist/category-group/category-group.spec.ts`
 - [ ] T003 [US1] Update CategoryGroup test DOM queries — replace any tag-based selectors (`li`, `ul`, `input`) with `data-testid` attribute selectors or Material element selectors (`mat-list-item`, `mat-icon`, `mat-form-field`) in `src/app/checklist/category-group/category-group.spec.ts`
 
 ### Implementation for CategoryGroup
@@ -84,9 +84,8 @@
 
 ### Phase Dependencies
 
-- **Setup (Phase 1)**: No dependencies — start immediately
-- **US1+US2 CategoryGroup (Phase 2)**: Depends on Phase 1 (animations provider)
-- **US1+US2 ChecklistPage (Phase 3)**: Depends on Phase 1; can run in parallel with Phase 2 (different files)
+- **US1+US2 CategoryGroup (Phase 2)**: No setup dependencies — start immediately
+- **US1+US2 ChecklistPage (Phase 3)**: No setup dependencies; can run in parallel with Phase 2 (different files)
 - **US3 Accessibility (Phase 4)**: Depends on Phases 2 and 3 (all Material migration complete)
 - **Polish (Phase 5)**: Depends on all prior phases
 
@@ -126,16 +125,15 @@ Stream B: T007 → T008 → T009 → T010 → T011  (ChecklistPage)
 
 ## Implementation Strategy
 
-### MVP First (Phase 1 + Phase 2 Only)
+### MVP First (Phase 2 Only)
 
-1. Complete Phase 1: Setup (T001)
-2. Complete Phase 2: CategoryGroup migration (T002–T006)
-3. **STOP and VALIDATE**: CategoryGroup renders with Material, all tests pass, drag-drop works
-4. This alone delivers visible Material UI for the most complex component
+1. Complete Phase 2: CategoryGroup migration (T002–T006)
+2. **STOP and VALIDATE**: CategoryGroup renders with Material, all tests pass, drag-drop works
+3. This alone delivers visible Material UI for the most complex component
 
 ### Incremental Delivery
 
-1. Phase 2 → CategoryGroup Material migration → Test independently (MVP!)
+1. Phase 2 → CategoryGroup Material migration → Test independently (MVP! No setup phase needed.)
 2. Phase 3 → ChecklistPage Material migration → Test independently
 3. Phase 4 → Accessibility verified
 4. Phase 5 → Full validation, build, polish
@@ -144,8 +142,7 @@ Stream B: T007 → T008 → T009 → T010 → T011  (ChecklistPage)
 
 With two developers:
 
-1. Both complete Phase 1 together (single file, fast)
-2. Once Phase 1 is done:
+1. Start immediately (no setup phase needed):
    - Developer A: Phase 2 (CategoryGroup — T002–T006)
    - Developer B: Phase 3 (ChecklistPage — T007–T011)
 3. Both complete Phase 4 + 5 together (verification)
