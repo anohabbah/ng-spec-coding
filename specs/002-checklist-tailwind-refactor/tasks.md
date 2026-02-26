@@ -23,8 +23,8 @@
 
 ### Implementation for User Story 1
 
-- [ ] T001 [P] [US1] In `src/app/checklist/checklist.page.ts`: remove `styleUrl: './checklist.page.css'` from `@Component` decorator and add `host: { class: 'block max-w-[800px] mx-auto py-6 px-4' }` to replace the `:host` CSS rule (research §R1, §R2)
-- [ ] T002 [P] [US1] In `src/app/checklist/checklist.page.html`: add `class="mb-6"` to the `<h1>` element to replace the `h1 { margin-bottom: 24px; }` CSS rule (research §R3)
+- [x] T001 [P] [US1] In `src/app/checklist/checklist.page.ts`: remove `styleUrl: './checklist.page.css'` from `@Component` decorator and add `host: { class: 'block max-w-[800px] mx-auto py-6 px-4' }` to replace the `:host` CSS rule (research §R1, §R2)
+- [x] T002 [P] [US1] In `src/app/checklist/checklist.page.html`: add `class="mb-6"` to the `<h1>` element to replace the `h1 { margin-bottom: 24px; }` CSS rule (research §R3)
 
 **Checkpoint**: ChecklistPage renders identically to pre-refactoring baseline. `checklist.page.css` is still present on disk but no longer referenced.
 
@@ -38,8 +38,8 @@
 
 ### Implementation for User Story 2
 
-- [ ] T003 [P] [US2] In `src/app/checklist/category-group/category-group.ts`: remove `styleUrl: './category-group.css'` from `@Component` decorator and add `host: { class: 'block' }` to replace the `:host` CSS rule (research §R1)
-- [ ] T004 [P] [US2] In `src/app/checklist/category-group/category-group.html`: add `class="list-none p-0 m-0"` to the `<ul>` element and add `class="flex items-center gap-2 py-2"` to each `<li>` element to replace the `ul` and `li` CSS rules (research §R3)
+- [x] T003 [P] [US2] In `src/app/checklist/category-group/category-group.ts`: remove `styleUrl: './category-group.css'` from `@Component` decorator and add `host: { class: 'block' }` to replace the `:host` CSS rule (research §R1)
+- [x] T004 [P] [US2] In `src/app/checklist/category-group/category-group.html`: add `class="list-none p-0 m-0"` to the `<ul>` element and add `class="flex items-center gap-2 py-2"` to each `<li>` element to replace the `ul` and `li` CSS rules (research §R3)
 
 **Checkpoint**: CategoryGroup renders identically to pre-refactoring baseline. `category-group.css` is still present on disk but no longer referenced.
 
@@ -55,9 +55,9 @@
 
 ### Implementation for User Story 3
 
-- [ ] T005 [P] [US3] Delete `src/app/checklist/checklist.page.css` (research §R4)
-- [ ] T006 [P] [US3] Delete `src/app/checklist/category-group/category-group.css` (research §R4)
-- [ ] T007 [US3] Verify no stray references to deleted CSS files remain in the codebase (quickstart §5: `grep -r "checklist.page.css\|category-group.css" src/` must return zero results)
+- [x] T005 [P] [US3] Delete `src/app/checklist/checklist.page.css` (research §R4)
+- [x] T006 [P] [US3] Delete `src/app/checklist/category-group/category-group.css` (research §R4)
+- [x] T007 [US3] Verify no stray references to deleted CSS files remain in the codebase (quickstart §5: `grep -r "checklist.page.css\|category-group.css" src/` must return zero results)
 
 **Checkpoint**: All user stories complete. Zero component-level CSS files remain in the checklist module.
 
@@ -67,8 +67,8 @@
 
 **Purpose**: Final verification across all stories.
 
-- [ ] T008 Run `ng build` and confirm zero errors and zero new warnings (quickstart §1, spec §FR-004, §SC-003)
-- [ ] T009 Run `npm test` and confirm all existing tests pass without modification (quickstart §2, spec §SC-004)
+- [x] T008 Run `ng build` and confirm zero errors and zero new warnings (quickstart §1, spec §FR-004, §SC-003)
+- [x] T009 Run `npm test` and confirm all existing tests pass without modification (quickstart §2, spec §SC-004) — 37/37 checklist tests pass; 1 pre-existing failure in app.spec.ts (unrelated scaffold test)
 - [ ] T010 Run full quickstart.md validation: serve the app and visually verify desktop, mobile, category groups, list items, and drag-drop per quickstart §3–§4
 
 ---

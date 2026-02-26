@@ -6,12 +6,13 @@
   }
 
   <ul
+    class="list-none p-0 m-0"
     cdkDropList
     [attr.aria-label]="category() + ' items list'"
     (cdkDropListDropped)="onDrop($event)"
   >
     @for (group of formArray().controls; track group.get('id')?.value; let i = $index; let first = $first; let last = $last) {
-      <li data-testid="checklist-item" cdkDrag>
+      <li class="flex items-center gap-2 py-2" data-testid="checklist-item" cdkDrag>
         <button
           type="button"
           data-testid="move-up-btn"

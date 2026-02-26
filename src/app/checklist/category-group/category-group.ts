@@ -6,9 +6,9 @@ import { Category } from '../checklist.model';
 @Component({
   selector: 'app-category-group',
   templateUrl: './category-group.html',
-  styleUrl: './category-group.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule, CdkDropList, CdkDrag],
+  host: { class: 'block' },
 })
 export class CategoryGroup {
   readonly category = input.required<Category>();
