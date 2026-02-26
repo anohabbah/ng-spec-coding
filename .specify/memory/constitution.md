@@ -1,17 +1,23 @@
 <!--
   Sync Impact Report
   ==================
-  Version change: 1.2.0 → 1.3.0
+  Version change: 1.3.0 → 1.4.0
 
   Modified principles:
-    - I. Component-First → added FormBuilder convention for
-      Reactive Forms construction
+    - VI. Accessibility → strengthened Material mandate from "prefer"
+      to "MUST use" and moved general UI component guidance to new
+      Angular Conventions > UI Components subsection
 
-  Added sections: N/A
+  Added sections:
+    - Angular Conventions > Styling (Tailwind-first mandate, custom
+      CSS forbidden unless Tailwind lacks the utility)
+    - Angular Conventions > UI Components (Angular Material-first
+      mandate for all UI, not just accessibility)
 
   Removed sections: N/A
 
-  Modified sections: N/A
+  Modified sections:
+    - Quality Gates → added Styling and UI Components gates
 
   Templates requiring updates:
     - .specify/templates/plan-template.md ✅ no changes needed
@@ -23,6 +29,12 @@
     - .specify/templates/commands/*.md ✅ no command files exist
 
   Follow-up TODOs:
+    - Existing code in src/app/checklist/ uses custom CSS files
+      (checklist.page.css, category-group.css) instead of Tailwind
+      utilities. Refactor to Tailwind in a follow-up PR.
+    - Existing code in src/app/checklist/ uses plain HTML elements
+      (button, input, ul/li) instead of Angular Material components.
+      Refactor to Material in a follow-up PR.
     - Existing code in src/app/checklist/ uses manual FormGroup/
       FormControl/FormArray instantiation. Refactor to use
       FormBuilder in a follow-up PR.
@@ -131,10 +143,7 @@ All UI MUST be accessible by default:
 - Custom interactive components MUST use `@angular/aria` directives
   to implement WAI-ARIA patterns (keyboard navigation, focus
   management, ARIA attributes, screen reader announcements)
-- When Angular Material provides a suitable component, prefer it over
-  building a custom `@angular/aria`-based component (Material
-  components already include full accessibility support)
-- When neither Material nor native HTML elements meet the
+- When neither Angular Material nor native HTML elements meet the
   requirement, `@angular/aria` directives MUST be used instead of
   manually implementing ARIA attributes and keyboard handlers
 
@@ -148,6 +157,64 @@ ARIA implementation.
 
 These conventions are derived from the Angular team's recommended
 guidelines and MUST be followed in all code:
+
+### UI Components
+
+Angular Material MUST be the default choice for all UI elements:
+
+- When Angular Material provides a component that matches the UI
+  need, it MUST be used instead of plain HTML elements
+- Common mappings (non-exhaustive):
+  - Buttons → `mat-button`, `mat-raised-button`, `mat-icon-button`
+  - Text inputs → `mat-form-field` + `matInput`
+  - Lists → `mat-list` + `mat-list-item`
+  - Cards/panels → `mat-card`
+  - Checkboxes → `mat-checkbox`
+  - Icons → `mat-icon`
+  - Dialogs → `MatDialog` service
+  - Menus → `mat-menu`
+  - Tables → `mat-table`
+  - Expansion panels → `mat-expansion-panel`
+  - Toolbars → `mat-toolbar`
+  - Dividers → `mat-divider`
+- Plain HTML elements (e.g., `<button>`, `<input>`, `<ul>`) MUST NOT
+  be used when an Angular Material equivalent exists
+- Angular CDK primitives (e.g., `CdkDragDrop`, `CdkVirtualScroll`)
+  MUST be used for behaviors not covered by Material components
+- When no Material component or CDK primitive fits, plain HTML with
+  `@angular/aria` directives is permitted
+
+**Rationale**: Angular Material components provide consistent theming,
+built-in accessibility (keyboard nav, ARIA, focus management), and
+responsive behavior out of the box. Using plain HTML duplicates this
+effort, introduces inconsistency, and risks accessibility gaps.
+
+### Styling
+
+Tailwind CSS MUST be the sole styling approach:
+
+- All visual styling MUST use Tailwind CSS utility classes in
+  templates
+- For `:host` element styling, use `host: { class: '...' }` in the
+  `@Component` decorator with Tailwind utility classes (e.g.,
+  `host: { class: 'block max-w-screen-md mx-auto px-4 py-6' }`)
+- Component CSS/SCSS files MUST NOT be created unless Tailwind CSS
+  lacks the required utility
+- When custom CSS is unavoidable, it MUST include a comment
+  explaining why no Tailwind equivalent exists
+- Do NOT use `@apply` to extract Tailwind utilities into custom CSS
+  classes unless the same combination appears in 5+ locations
+- Do NOT use inline `style` attributes or `[style.*]` bindings;
+  use Tailwind classes or Angular Material theming instead
+- Angular Material component theming MUST use the Material theming
+  system (CSS custom properties / `@angular/material` theme mixins),
+  not custom CSS overrides
+
+**Rationale**: Tailwind CSS provides a comprehensive utility-first
+system that eliminates the need for custom stylesheets, ensures
+consistency, reduces CSS bloat, and keeps styling co-located with
+markup. Custom CSS fragments scattered across component files lead
+to duplication, specificity conflicts, and maintenance burden.
 
 ### Templates
 
@@ -205,7 +272,10 @@ guidelines and MUST be followed in all code:
 ## Technology Stack
 
 - **Framework**: Angular 21+ with standalone components
-- **UI**: Angular Material + Tailwind CSS 4
+- **UI Components**: Angular Material 21+ (MUST be used for all UI
+  elements when a suitable component exists)
+- **Styling**: Tailwind CSS 4 (MUST be the sole styling approach;
+  custom CSS forbidden unless Tailwind lacks the utility)
 - **Accessibility**: @angular/aria (headless WAI-ARIA directives)
 - **State**: NgRx Signals + ngrx-toolkit
 - **Validation**: Zod 4
@@ -225,6 +295,11 @@ All code MUST pass these gates before merging:
 
 - **Build**: `ng build` MUST complete without errors
 - **Tests**: `ng test` MUST pass with no failures
+- **UI Components**: Plain HTML elements MUST NOT be used when an
+  Angular Material equivalent exists; reviewer MUST reject violations
+- **Styling**: All styling MUST use Tailwind CSS utility classes;
+  component CSS files MUST NOT exist unless justified with a comment
+  explaining why Tailwind is insufficient
 - **Accessibility**: MUST pass AXE checks; MUST meet WCAG AA minimums;
   custom interactive components MUST use `@angular/aria` directives
   for keyboard navigation and focus management
@@ -262,4 +337,4 @@ architectural choices MUST comply with these principles.
 - Complexity violations MUST be justified before approval
 - Quarterly review of constitution relevance is RECOMMENDED
 
-**Version**: 1.3.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-25
+**Version**: 1.4.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-26
