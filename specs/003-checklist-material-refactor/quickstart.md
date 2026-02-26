@@ -38,8 +38,8 @@ Runs Vitest with Angular TestBed. All checklist tests are in:
 
 | File                                                      | Change                                                                                                                                                     |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `src/app/checklist/checklist.page.ts`                     | Add Material module imports (`MatButtonModule`, `MatCardModule`, `MatIconModule`)                                                                          |
-| `src/app/checklist/checklist.page.html`                   | Replace plain buttons with `mat-raised-button`/`mat-button`, wrap content in `mat-card`                                                                    |
+| `src/app/checklist/checklist.page.ts`                     | Add Material module imports (`MatButtonModule`)                                                                                                            |
+| `src/app/checklist/checklist.page.html`                   | Replace plain buttons with `mat-raised-button`/`mat-button`                                                                                                |
 | `src/app/checklist/category-group/category-group.ts`      | Add Material module imports (`MatButtonModule`, `MatIconModule`, `MatFormFieldModule`, `MatInputModule`, `MatListModule`)                                  |
 | `src/app/checklist/category-group/category-group.html`    | Replace `ul`/`li` with `mat-list`/`mat-list-item`, `input` with `mat-form-field`+`matInput`, buttons with `mat-icon-button`, Unicode icons with `mat-icon` |
 | `src/app/checklist/checklist.page.spec.ts`                | Update DOM queries if any use tag-based selectors                                                                                                          |

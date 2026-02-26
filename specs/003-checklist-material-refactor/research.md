@@ -25,7 +25,7 @@
 | `<button>` (Reset)             | `<button mat-button>`                                          | Secondary action, less visual weight            |
 | `<button>` (Move up/down)      | `<button mat-icon-button>`                                     | Small action icons, compact touch target        |
 | `<button>` (Delete)            | `<button mat-icon-button>`                                     | Small action icon, consistent with move buttons |
-| `<button>` (Add)               | `<button mat-mini-fab>` or `<button mat-icon-button>`          | Add action alongside input field                |
+| `<button>` (Add)               | `<button mat-icon-button>`                                     | Add action alongside input field; `mat-icon-button` chosen over `mat-mini-fab` for visual consistency with the adjacent move/delete icon buttons |
 | Unicode ↑ / ↓ / "Delete" text  | `<mat-icon>` with `arrow_upward` / `arrow_downward` / `delete` | Standard Material icon set, already loaded      |
 | `<input type="text">`          | `<mat-form-field><input matInput>`                             | Floating label, focus states, Material styling  |
 | `<ul>` / `<li>`                | `<mat-list>` / `<mat-list-item>`                               | Structured list layout with consistent spacing  |

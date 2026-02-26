@@ -7,6 +7,8 @@
 
 **Organization**: US1 (Material appearance) and US2 (preserved functionality) are both P1 and every template change touches both simultaneously — they share the same implementation phase, organized by component. US3 (accessibility) is a P2 verification phase.
 
+**Phases 0–1 (complete)**: Research and design artifacts (research.md, data-model.md, quickstart.md) were produced prior to task generation. Task numbering and phase numbering begin at 2 accordingly.
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
@@ -30,7 +32,7 @@
 
 - [ ] T004 [US1] Add Material module imports (`MatListModule`, `MatIconModule`, `MatButtonModule`, `MatFormFieldModule`, `MatInputModule`, `MatCardModule`) to the `imports` array in `src/app/checklist/category-group/category-group.ts`
 - [ ] T005 [US1] Refactor `src/app/checklist/category-group/category-group.html` — wrap `<section>` content in `<mat-card>` with `<mat-card-header>` for the `<h3>` title; replace `<ul>` with `<mat-list cdkDropList>` and `<li>` with `<mat-list-item cdkDrag>`; replace Unicode `↑`/`↓` buttons with `<button mat-icon-button><mat-icon>arrow_upward</mat-icon></button>` and `<button mat-icon-button><mat-icon>arrow_downward</mat-icon></button>`; replace "Delete" text button with `<button mat-icon-button><mat-icon>delete</mat-icon></button>`; replace `<input>` with `<mat-form-field><mat-label>New item for {{category()}}</mat-label><input matInput></mat-form-field>`; replace Add button with `<button mat-icon-button><mat-icon>add</mat-icon></button>`. Preserve all `data-testid`, `aria-label`, `[disabled]`, `(click)`, `(keydown.enter)`, `(input)`, and `(cdkDropListDropped)` bindings exactly as they are.
-- [ ] T006 [US2] Verify CategoryGroup tests pass — run `npx ng test` and confirm all 15 tests in `src/app/checklist/category-group/category-group.spec.ts` pass with no behavioral regressions
+- [ ] T006 [US2] Verify CategoryGroup tests pass — run `npx ng test` and confirm all existing tests in `src/app/checklist/category-group/category-group.spec.ts` pass with no behavioral regressions
 
 **Checkpoint**: CategoryGroup renders with full Material styling. Add, delete, reorder (buttons + drag-drop) all work. Tests pass.
 
@@ -44,16 +46,16 @@
 
 ### Test Updates for ChecklistPage
 
-- [ ] T007 [US1] Update ChecklistPage TestBed to import Material modules (`MatButtonModule`, `MatIconModule`)
+- [ ] T007 [US1] Update ChecklistPage TestBed to import Material modules (`MatButtonModule`)
 - [ ] T008 [US1] Update ChecklistPage test DOM queries — replace any tag-based button selectors with `data-testid` or Material attribute selectors in `src/app/checklist/checklist.page.spec.ts`
 
 ### Implementation for ChecklistPage
 
-- [ ] T009 [US1] Add Material module imports (`MatButtonModule`, `MatIconModule`) to the `imports` array in `src/app/checklist/checklist.page.ts`
+- [ ] T009 [US1] Add Material module imports (`MatButtonModule`) to the `imports` array in `src/app/checklist/checklist.page.ts`
 - [ ] T010 [US1] Refactor `src/app/checklist/checklist.page.html` — replace Submit `<button>` with `<button mat-raised-button color="primary">`, replace Reset `<button>` with `<button mat-button>`, replace the `<div class="actions">` wrapper with a flex container using Tailwind classes (`class="flex gap-4 mt-6"`). Preserve all `data-testid`, `aria-label`, `type="button"`, and `(click)` bindings exactly.
-- [ ] T011 [US2] Verify ChecklistPage tests pass — run `npx ng test` and confirm all 14 tests in `src/app/checklist/checklist.page.spec.ts` pass with no behavioral regressions
+- [ ] T011 [US2] Verify ChecklistPage tests pass — run `npx ng test` and confirm all existing tests in `src/app/checklist/checklist.page.spec.ts` pass with no behavioral regressions
 
-**Checkpoint**: Both components fully migrated to Material. All 29+ tests pass. No plain HTML interactive elements remain.
+**Checkpoint**: Both components fully migrated to Material. All existing tests pass. No plain HTML interactive elements remain.
 
 ---
 
@@ -65,8 +67,9 @@
 
 - [ ] T012 [US3] Verify all `aria-label` attributes are present and correct on every interactive Material element across `src/app/checklist/checklist.page.html` and `src/app/checklist/category-group/category-group.html`
 - [ ] T013 [US3] Verify keyboard navigation — Tab order reaches all buttons and inputs in logical sequence, Enter/Space activates buttons, Enter in the add-item input triggers addItem, disabled buttons are skipped in tab order
+- [ ] T014 [US1] Verify edge cases — (a) category with zero items displays empty state correctly within Material layout, (b) rapid sequential move-up/move-down clicks update the Material list without visual glitches or lost items, (c) page renders correctly on a narrow viewport (≤ 480px) with no clipped or overflowing interactive controls
 
-**Checkpoint**: Accessibility verified. All aria-labels preserved, keyboard navigation functional, Material built-in a11y active.
+**Checkpoint**: Accessibility verified. All aria-labels preserved, keyboard navigation functional, Material built-in a11y active. Edge cases confirmed.
 
 ---
 
@@ -74,9 +77,10 @@
 
 **Purpose**: Final validation across all stories
 
-- [ ] T014 Run full build (`npx ng build`) and confirm no errors, bundle size within thresholds (< 500 kB warning / 1 MB error)
-- [ ] T015 Run full test suite (`npx ng test`) and confirm all tests pass across the entire project
-- [ ] T016 Run quickstart.md verification checklist — confirm all 9 verification items from `specs/003-checklist-material-refactor/quickstart.md` pass
+- [ ] T015 Run full build (`npx ng build`) and confirm no errors, bundle size within thresholds (< 500 kB warning / 1 MB error)
+- [ ] T016 Run full test suite (`npx ng test`) and confirm all tests pass across the entire project
+- [ ] T017 Run Prettier formatting check (`npx prettier --check "src/app/checklist/**"`) and fix any violations
+- [ ] T018 Run quickstart.md verification checklist — confirm all 9 verification items from `specs/003-checklist-material-refactor/quickstart.md` pass
 
 ---
 

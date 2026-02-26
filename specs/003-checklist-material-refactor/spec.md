@@ -86,7 +86,7 @@ A user relying on assistive technology (screen reader, keyboard navigation) can 
 - **SC-002**: All existing user workflows (add, delete, reorder, drag-drop, submit, reset) pass acceptance testing with no behavioral changes
 - **SC-003**: Keyboard navigation allows reaching and operating every interactive element without a mouse
 - **SC-004**: No accessibility regressions — existing aria-labels are preserved and Material built-in accessibility features are active
-- **SC-005**: The page visually aligns with Material Design guidelines for spacing, elevation, typography, and color usage
+- **SC-005**: The page visually aligns with Material Design guidelines — verified by passing all 9 items in the quickstart verification checklist (Material button styling with ripple, floating label input, Material list layout, Material icons, drag-and-drop functional, keyboard navigation, no unstyled browser-default elements)
 
 ## Assumptions
 
