@@ -1,18 +1,46 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
-import { type FormControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  type FormControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatCard, MatCardHeader, MatCardContent, MatCardTitle } from '@angular/material/card';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 import { Category } from '../checklist.model';
 
 @Component({
   selector: 'app-category-group',
   templateUrl: './category-group.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, CdkDropList, CdkDrag],
+  imports: [
+    ReactiveFormsModule,
+    CdkDropList,
+    CdkDrag,
+    MatCard,
+    MatCardHeader,
+    MatCardContent,
+    MatCardTitle,
+    MatList,
+    MatListItem,
+    MatIcon,
+    MatIconButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+  ],
   host: { class: 'block' },
 })
 export class CategoryGroup {
   readonly category = input.required<Category>();
-  readonly formArray = input.required<FormArray<FormGroup<{ id: FormControl<string>; label: FormControl<string> }>>>();
+  readonly formArray =
+    input.required<FormArray<FormGroup<{ id: FormControl<string>; label: FormControl<string> }>>>();
   private readonly fb = inject(FormBuilder);
 
   readonly newItemLabel = signal('');
