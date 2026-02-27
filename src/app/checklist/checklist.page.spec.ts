@@ -136,8 +136,8 @@ describe('ChecklistPage', () => {
       component.submit();
 
       const cats = store.categories();
-      expect(cats.MORNING.length).toBe(1);
-      expect(cats.MORNING[0].label).toBe('Submitted item');
+      expect(cats['MORNING'].length).toBe(1);
+      expect(cats['MORNING'][0].label).toBe('Submitted item');
     });
 
     it('should succeed when submitting empty template with no items', async () => {
@@ -167,9 +167,9 @@ describe('ChecklistPage', () => {
       component.submit();
 
       const cats = store.categories();
-      expect(cats.MORNING.length).toBe(1);
-      expect(cats.EVENING.length).toBe(0);
-      expect(cats.NIGHT.length).toBe(1);
+      expect(cats['MORNING'].length).toBe(1);
+      expect(cats['EVENING'].length).toBe(0);
+      expect(cats['NIGHT'].length).toBe(1);
     });
 
     it('should revert form to store state on reset', async () => {

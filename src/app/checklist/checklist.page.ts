@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { ChecklistStore } from './checklist.store';
@@ -44,7 +44,7 @@ export class ChecklistPage implements OnInit {
         };
         const result = ChecklistItemSchema.safeParse(raw);
         if (result.success) {
-          items.push(result.data as ChecklistItem);
+          items.push(result.data);
         }
       });
     }
@@ -59,12 +59,12 @@ export class ChecklistPage implements OnInit {
   private populateFormFromStore(): void {
     const categorized = this.store.categories();
     for (const cat of CATEGORIES) {
-      const items = categorized[cat];
-      const formArray = this.getFormArray(cat);
-      formArray.clear();
-      for (const item of items) {
-        formArray.push(this.createItemGroup(item));
-      }
+      const items = categorized[cat] ?? [];
+      // Use setControl() to replace each FormArray with a new instance.
+      // Mutating in place (clear + push) won't trigger re-render in OnPush
+      // children that receive the FormArray via a signal input, since the
+      // object reference stays the same.
+      this.form.setControl(cat, this.fb.array(items.map(item => this.createItemGroup(item))));
     }
     this.form.markAsPristine();
   }

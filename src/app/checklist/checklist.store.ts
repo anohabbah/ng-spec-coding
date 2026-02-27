@@ -1,30 +1,23 @@
 import { computed } from '@angular/core';
-import { signalStore, withComputed, withMethods } from '@ngrx/signals';
+import { signalStore, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { withEntities, setAllEntities } from '@ngrx/signals/entities';
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
-import { patchState } from '@ngrx/signals';
-import { ChecklistItem, Category, ChecklistItemSchema } from './checklist.model';
-import { z } from 'zod';
+import {Category, ChecklistItem, ChecklistItemSchema} from './checklist.model';
+import { chain } from 'lodash';
+import { sortBy } from 'lodash/fp';
 
 export const ChecklistStore = signalStore(
   { providedIn: 'root' },
   withEntities<ChecklistItem>(),
   withComputed((store) => ({
     categories: computed(() => {
-      const all = store.entities();
-      const grouped: Record<Category, ChecklistItem[]> = {
-        MORNING: [],
-        EVENING: [],
-        NIGHT: [],
-      };
-      for (const item of all) {
-        grouped[item.category].push(item);
-      }
-      grouped.MORNING.sort((a, b) => a.position - b.position);
-      grouped.EVENING.sort((a, b) => a.position - b.position);
-      grouped.NIGHT.sort((a, b) => a.position - b.position);
-      return grouped;
-    }),
+        const grouped = chain(store.entities())
+          .groupBy('category')
+          .mapValues(sortBy<ChecklistItem>('position'))
+          .value();
+        return { MORNING: [], EVENING: [], NIGHT: [], ...grouped } as Record<Category, ChecklistItem[]>;
+      },
+    ),
     totalItems: computed(() => store.entities().length),
     isEmpty: computed(() => store.entities().length === 0),
   })),

@@ -3,10 +3,6 @@
     <mat-card-title>{{ category() }}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    @if (formArray().length === 0) {
-      <p data-testid="empty-state">No items in this category.</p>
-    }
-
     <mat-list
       cdkDropList
       [attr.aria-label]="category() + ' items list'"
@@ -20,42 +16,53 @@
         let last = $last
       ) {
         <mat-list-item data-testid="checklist-item" cdkDrag>
-          <button
-            mat-icon-button
-            type="button"
-            data-testid="move-up-btn"
-            [attr.aria-label]="'Move ' + group.get('label')?.value + ' up'"
-            [disabled]="first"
-            (click)="moveUp(i)"
-          >
-            <mat-icon>arrow_upward</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            type="button"
-            data-testid="move-down-btn"
-            [attr.aria-label]="'Move ' + group.get('label')?.value + ' down'"
-            [disabled]="last"
-            (click)="moveDown(i)"
-          >
-            <mat-icon>arrow_downward</mat-icon>
-          </button>
-          <span>{{ group.get('label')?.value }}</span>
-          <button
-            mat-icon-button
-            type="button"
-            data-testid="delete-item-btn"
-            [attr.aria-label]="'Delete ' + group.get('label')?.value"
-            (click)="deleteItem(i)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+          <span matListItemTitle>
+            {{ group.get('label')?.value }}
+          </span>
+          <div matListItemMeta class="shrink-0 flex items-stretch gap-1">
+            <button
+              mat-icon-button
+              type="button"
+              data-testid="delete-item-btn"
+              [attr.aria-label]="'Delete ' + group.get('label')?.value"
+              (click)="deleteItem(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <span>
+                <button
+                  mat-icon-button
+                  type="button"
+                  data-testid="move-up-btn"
+                  [attr.aria-label]="'Move ' + group.get('label')?.value + ' up'"
+                  [disabled]="first"
+                  (click)="moveUp(i)"
+                >
+                  <mat-icon>arrow_upward</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  type="button"
+                  data-testid="move-down-btn"
+                  [attr.aria-label]="'Move ' + group.get('label')?.value + ' down'"
+                  [disabled]="last"
+                  (click)="moveDown(i)"
+                >
+                  <mat-icon>arrow_downward</mat-icon>
+                </button>
+              </span>
+          </div>
+        </mat-list-item>
+        <mat-divider/>
+      } @empty {
+        <mat-list-item data-testid="empty-state">
+          <span matListItemTitle>No items in this category.</span>
         </mat-list-item>
       }
     </mat-list>
 
     <div class="flex items-center gap-2 mt-2">
-      <mat-form-field>
+      <mat-form-field class="grow" subscriptSizing="dynamic">
         <mat-label>New item for {{ category() }}</mat-label>
         <input
           matInput
@@ -68,6 +75,7 @@
       </mat-form-field>
       <button
         mat-icon-button
+        class="shrink-0"
         type="button"
         data-testid="add-item-btn"
         [attr.aria-label]="'Add item to ' + category()"

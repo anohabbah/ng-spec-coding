@@ -8,7 +8,13 @@ import {
 } from '@angular/forms';
 import { CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCard, MatCardHeader, MatCardContent, MatCardTitle } from '@angular/material/card';
-import { MatList, MatListItem } from '@angular/material/list';
+import {
+  MatDivider,
+  MatList,
+  MatListItem,
+  MatListItemMeta,
+  MatListItemTitle
+} from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
@@ -34,6 +40,9 @@ import { Category } from '../checklist.model';
     MatFormField,
     MatLabel,
     MatInput,
+    MatDivider,
+    MatListItemTitle,
+    MatListItemMeta,
   ],
   host: { class: 'block' },
 })
