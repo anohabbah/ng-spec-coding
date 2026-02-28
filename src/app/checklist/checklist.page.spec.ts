@@ -96,9 +96,7 @@ describe('ChecklistPage', () => {
 
       // Modify the form (add an item to MORNING FormArray)
       const morningArray = component.getFormArray(Category.MORNING);
-      morningArray.push(
-        fb.nonNullable.group({ id: 'new-id', label: 'New item' }),
-      );
+      morningArray.push(fb.nonNullable.group({ id: 'new-id', label: 'New item' }));
 
       // Store should still have only original item
       expect(store.entities().length).toBe(1);
@@ -113,9 +111,7 @@ describe('ChecklistPage', () => {
 
       // Add items to the form
       const morningArray = component.getFormArray(Category.MORNING);
-      morningArray.push(
-        fb.nonNullable.group({ id: 'id-1', label: 'Wake up' }),
-      );
+      morningArray.push(fb.nonNullable.group({ id: 'id-1', label: 'Wake up' }));
 
       component.submit();
 
@@ -129,15 +125,13 @@ describe('ChecklistPage', () => {
       await fixture.whenStable();
 
       const morningArray = component.getFormArray(Category.MORNING);
-      morningArray.push(
-        fb.nonNullable.group({ id: 'id-1', label: 'Submitted item' }),
-      );
+      morningArray.push(fb.nonNullable.group({ id: 'id-1', label: 'Submitted item' }));
 
       component.submit();
 
       const cats = store.categories();
-      expect(cats.MORNING.length).toBe(1);
-      expect(cats.MORNING[0].label).toBe('Submitted item');
+      expect(cats['MORNING'].length).toBe(1);
+      expect(cats['MORNING'][0].label).toBe('Submitted item');
     });
 
     it('should succeed when submitting empty template with no items', async () => {
@@ -155,21 +149,17 @@ describe('ChecklistPage', () => {
       await fixture.whenStable();
 
       const morningArray = component.getFormArray(Category.MORNING);
-      morningArray.push(
-        fb.nonNullable.group({ id: 'id-1', label: 'Morning item' }),
-      );
+      morningArray.push(fb.nonNullable.group({ id: 'id-1', label: 'Morning item' }));
 
       const nightArray = component.getFormArray(Category.NIGHT);
-      nightArray.push(
-        fb.nonNullable.group({ id: 'id-2', label: 'Night item' }),
-      );
+      nightArray.push(fb.nonNullable.group({ id: 'id-2', label: 'Night item' }));
 
       component.submit();
 
       const cats = store.categories();
-      expect(cats.MORNING.length).toBe(1);
-      expect(cats.EVENING.length).toBe(0);
-      expect(cats.NIGHT.length).toBe(1);
+      expect(cats['MORNING'].length).toBe(1);
+      expect(cats['EVENING'].length).toBe(0);
+      expect(cats['NIGHT'].length).toBe(1);
     });
 
     it('should revert form to store state on reset', async () => {
@@ -182,9 +172,7 @@ describe('ChecklistPage', () => {
 
       // Add an unsaved item
       const morningArray = component.getFormArray(Category.MORNING);
-      morningArray.push(
-        fb.nonNullable.group({ id: 'unsaved', label: 'Unsaved' }),
-      );
+      morningArray.push(fb.nonNullable.group({ id: 'unsaved', label: 'Unsaved' }));
 
       expect(morningArray.length).toBe(2);
 
@@ -200,9 +188,7 @@ describe('ChecklistPage', () => {
 
       // Add item without submitting
       const eveningArray = component.getFormArray(Category.EVENING);
-      eveningArray.push(
-        fb.nonNullable.group({ id: 'tmp', label: 'Temp' }),
-      );
+      eveningArray.push(fb.nonNullable.group({ id: 'tmp', label: 'Temp' }));
 
       component.reset();
 

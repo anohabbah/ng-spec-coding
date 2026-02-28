@@ -62,18 +62,18 @@ describe('ChecklistStore', () => {
       store.saveChecklist(items);
 
       const cats = store.categories();
-      expect(cats.MORNING.map((i) => i.label)).toEqual(['M1', 'M2']);
-      expect(cats.EVENING.map((i) => i.label)).toEqual(['E1']);
-      expect(cats.NIGHT.map((i) => i.label)).toEqual(['N1', 'N2']);
+      expect(cats['MORNING'].map((i) => i.label)).toEqual(['M1', 'M2']);
+      expect(cats['EVENING'].map((i) => i.label)).toEqual(['E1']);
+      expect(cats['NIGHT'].map((i) => i.label)).toEqual(['N1', 'N2']);
     });
 
     it('should return empty arrays for categories with no items', () => {
       store.saveChecklist([]);
 
       const cats = store.categories();
-      expect(cats.MORNING).toEqual([]);
-      expect(cats.EVENING).toEqual([]);
-      expect(cats.NIGHT).toEqual([]);
+      expect(cats['MORNING']).toEqual([]);
+      expect(cats['EVENING']).toEqual([]);
+      expect(cats['NIGHT']).toEqual([]);
     });
   });
 
@@ -108,7 +108,9 @@ describe('ChecklistStore', () => {
       const stored = localStorage.getItem('checklistTemplate');
       expect(stored).toBeTruthy();
       const parsed = JSON.parse(stored!);
-      expect(parsed.ids?.length ?? parsed.entityMap?.length ?? Object.keys(parsed).length).toBeGreaterThan(0);
+      expect(
+        parsed.ids?.length ?? parsed.entityMap?.length ?? Object.keys(parsed).length
+      ).toBeGreaterThan(0);
     });
 
     it('should restore state from localStorage on init', () => {
