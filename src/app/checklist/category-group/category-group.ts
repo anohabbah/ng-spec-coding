@@ -13,7 +13,7 @@ import {
   MatList,
   MatListItem,
   MatListItemMeta,
-  MatListItemTitle
+  MatListItemTitle,
 } from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';

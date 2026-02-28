@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "singleQuote": true,
+  "semi": true,
+  "ignorePatterns": ["*.md", "**/dist/**", "CLAUDE.md", ".specify", ".specs"]
+}

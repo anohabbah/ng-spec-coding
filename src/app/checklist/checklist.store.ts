@@ -2,7 +2,7 @@ import { computed } from '@angular/core';
 import { signalStore, withComputed, withMethods, patchState } from '@ngrx/signals';
 import { withEntities, setAllEntities } from '@ngrx/signals/entities';
 import { withStorageSync } from '@angular-architects/ngrx-toolkit';
-import {Category, ChecklistItem, ChecklistItemSchema} from './checklist.model';
+import { Category, ChecklistItem, ChecklistItemSchema } from './checklist.model';
 import { chain } from 'lodash';
 import { sortBy } from 'lodash/fp';
 
@@ -11,13 +11,15 @@ export const ChecklistStore = signalStore(
   withEntities<ChecklistItem>(),
   withComputed((store) => ({
     categories: computed(() => {
-        const grouped = chain(store.entities())
-          .groupBy('category')
-          .mapValues(sortBy<ChecklistItem>('position'))
-          .value();
-        return { MORNING: [], EVENING: [], NIGHT: [], ...grouped } as Record<Category, ChecklistItem[]>;
-      },
-    ),
+      const grouped = chain(store.entities())
+        .groupBy('category')
+        .mapValues(sortBy<ChecklistItem>('position'))
+        .value();
+      return { MORNING: [], EVENING: [], NIGHT: [], ...grouped } as Record<
+        Category,
+        ChecklistItem[]
+      >;
+    }),
     totalItems: computed(() => store.entities().length),
     isEmpty: computed(() => store.entities().length === 0),
   })),
@@ -52,5 +54,5 @@ export const ChecklistStore = signalStore(
         return { ids: [], entityMap: {} };
       }
     },
-  }),
+  })
 );

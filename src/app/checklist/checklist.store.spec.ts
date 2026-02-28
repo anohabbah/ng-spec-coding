@@ -108,7 +108,9 @@ describe('ChecklistStore', () => {
       const stored = localStorage.getItem('checklistTemplate');
       expect(stored).toBeTruthy();
       const parsed = JSON.parse(stored!);
-      expect(parsed.ids?.length ?? parsed.entityMap?.length ?? Object.keys(parsed).length).toBeGreaterThan(0);
+      expect(
+        parsed.ids?.length ?? parsed.entityMap?.length ?? Object.keys(parsed).length
+      ).toBeGreaterThan(0);
     });
 
     it('should restore state from localStorage on init', () => {

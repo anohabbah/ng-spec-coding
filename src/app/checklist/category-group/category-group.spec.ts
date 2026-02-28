@@ -6,16 +6,18 @@ import { Component, viewChild } from '@angular/core';
 
 function buildFormArray(
   fb: FormBuilder,
-  items: { id: string; label: string }[],
+  items: { id: string; label: string }[]
 ): FormArray<FormGroup> {
   return fb.array(
-    items.map((item) => fb.nonNullable.group({ id: item.id, label: item.label })),
+    items.map((item) => fb.nonNullable.group({ id: item.id, label: item.label }))
   ) as FormArray<FormGroup>;
 }
 
 @Component({
   imports: [CategoryGroup],
-  template: `<app-category-group [category]="category" [formArray]="formArray" />`,
+  template: `
+    <app-category-group [category]="category" [formArray]="formArray" />
+  `,
 })
 class TestHost {
   category: Category = Category.MORNING;
@@ -87,10 +89,10 @@ describe('CategoryGroup', () => {
 
     it('should append FormGroup to FormArray when adding', async () => {
       const input: HTMLInputElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-input"]',
+        '[data-testid="add-item-input"]'
       );
       const addBtn: HTMLButtonElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-btn"]',
+        '[data-testid="add-item-btn"]'
       );
 
       input.value = 'New item';
@@ -106,10 +108,10 @@ describe('CategoryGroup', () => {
 
     it('should generate id when adding item', async () => {
       const input: HTMLInputElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-input"]',
+        '[data-testid="add-item-input"]'
       );
       const addBtn: HTMLButtonElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-btn"]',
+        '[data-testid="add-item-btn"]'
       );
 
       input.value = 'New item';
@@ -125,7 +127,7 @@ describe('CategoryGroup', () => {
 
     it('should show validation error and prevent add for empty label', async () => {
       const addBtn: HTMLButtonElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-btn"]',
+        '[data-testid="add-item-btn"]'
       );
       addBtn.click();
       fixture.detectChanges();
@@ -136,10 +138,10 @@ describe('CategoryGroup', () => {
 
     it('should show validation error and prevent add for whitespace-only label', async () => {
       const input: HTMLInputElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-input"]',
+        '[data-testid="add-item-input"]'
       );
       const addBtn: HTMLButtonElement = fixture.nativeElement.querySelector(
-        '[data-testid="add-item-btn"]',
+        '[data-testid="add-item-btn"]'
       );
 
       input.value = '   ';
@@ -203,14 +205,14 @@ describe('CategoryGroup', () => {
 
     it('should disable up button on first item', async () => {
       const upBtns: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll(
-        '[data-testid="move-up-btn"]',
+        '[data-testid="move-up-btn"]'
       );
       expect(upBtns[0].disabled).toBe(true);
     });
 
     it('should disable down button on last item', async () => {
       const downBtns: NodeListOf<HTMLButtonElement> = fixture.nativeElement.querySelectorAll(
-        '[data-testid="move-down-btn"]',
+        '[data-testid="move-down-btn"]'
       );
       expect(downBtns[downBtns.length - 1].disabled).toBe(true);
     });
