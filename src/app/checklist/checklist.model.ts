@@ -25,5 +25,5 @@ export const ChecklistItemSchema = z.object({
   id: z.string().min(1),
   label: z.string().trim().min(1),
   position: z.number().int().nonnegative(),
-  category: z.enum(['MORNING', 'EVENING', 'NIGHT']),
+  category: z.enum(['MORNING', 'EVENING', 'NIGHT'] as const),
 });
