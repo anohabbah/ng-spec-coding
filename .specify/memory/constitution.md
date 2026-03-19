@@ -1,31 +1,29 @@
 <!--
   Sync Impact Report
   ==================
-  Version change: 1.3.0 → 1.4.0
+  Version change: 1.4.0 → 1.5.0
 
   Modified principles:
-    - VI. Accessibility → strengthened Material mandate from "prefer"
-      to "MUST use" and moved general UI component guidance to new
-      Angular Conventions > UI Components subsection
+    - III. Test-First → expanded to mandate `/tdd` skill for ALL
+      task execution; TDD is no longer just a guideline but an
+      enforced workflow via the /tdd skill's red-green-refactor loop
 
-  Added sections:
-    - Angular Conventions > Styling (Tailwind-first mandate, custom
-      CSS forbidden unless Tailwind lacks the utility)
-    - Angular Conventions > UI Components (Angular Material-first
-      mandate for all UI, not just accessibility)
+  Added sections: N/A
 
   Removed sections: N/A
 
   Modified sections:
-    - Quality Gates → added Styling and UI Components gates
+    - Quality Gates → added TDD Workflow gate mandating `/tdd` skill
+    - Principle III bullet list → added /tdd skill mandate and
+      explicit prohibition of implementing without running /tdd first
 
   Templates requiring updates:
     - .specify/templates/plan-template.md ✅ no changes needed
       (Constitution Check references constitution dynamically)
     - .specify/templates/spec-template.md ✅ no changes needed
       (no hardcoded principle references)
-    - .specify/templates/tasks-template.md ✅ no changes needed
-      (no hardcoded principle references)
+    - .specify/templates/tasks-template.md ✅ updated: tests changed
+      from OPTIONAL to MANDATORY, /tdd skill usage mandated
     - .specify/templates/commands/*.md ✅ no command files exist
 
   Follow-up TODOs:
@@ -88,18 +86,28 @@ Strict TypeScript MUST be enforced across the entire codebase:
 **Rationale**: Type safety catches bugs at compile time, serves as
 living documentation, and enables confident refactoring.
 
-### III. Test-First (NON-NEGOTIABLE)
+### III. Test-First via `/tdd` Skill (NON-NEGOTIABLE)
 
-TDD MUST be followed for all feature development:
+TDD MUST be followed for ALL feature development. Every task MUST
+be executed exclusively through the `/tdd` skill's red-green-refactor
+loop:
 
+- Every task MUST be implemented by invoking `/tdd`—direct
+  implementation without `/tdd` is FORBIDDEN
+- `/tdd` enforces the red-green-refactor cycle: write a failing
+  Vitest spec → implement minimum code to pass → refactor
 - Write Vitest specs FIRST
-- Verify specs FAIL before implementation
-- Implement the minimum code to pass specs
-- Refactor only after green
+- Verify specs FAIL before writing any implementation code
+- Implement the minimum code to pass specs—no more
+- Refactor only after green (all specs pass)
 - Every component MUST have a corresponding `.spec.ts` file
+- No task is considered complete until it has passed through the
+  full `/tdd` red-green-refactor cycle
 
 **Rationale**: Test-first development prevents gold-plating, ensures
-requirements are met, and provides regression safety.
+requirements are met, and provides regression safety. Mandating the
+`/tdd` skill ensures the red-green-refactor discipline is
+consistently enforced—not left to developer discretion.
 
 ### IV. Signal-First State
 
@@ -295,6 +303,8 @@ All code MUST pass these gates before merging:
 
 - **Build**: `ng build` MUST complete without errors
 - **Tests**: `ng test` MUST pass with no failures
+- **TDD Workflow**: Every task MUST be executed via the `/tdd` skill;
+  PRs without evidence of red-green-refactor cycle MUST be rejected
 - **UI Components**: Plain HTML elements MUST NOT be used when an
   Angular Material equivalent exists; reviewer MUST reject violations
 - **Styling**: All styling MUST use Tailwind CSS utility classes;
@@ -337,4 +347,4 @@ architectural choices MUST comply with these principles.
 - Complexity violations MUST be justified before approval
 - Quarterly review of constitution relevance is RECOMMENDED
 
-**Version**: 1.4.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-02-26
+**Version**: 1.5.0 | **Ratified**: 2026-02-25 | **Last Amended**: 2026-03-19

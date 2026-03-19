@@ -51,8 +51,8 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*": "oxfmt",
-    "*.{ts}": "oxlint --fix"
+    "*.{ts,html,json,css,scss}": "oxfmt",
+    "*.ts": "oxlint --fix"
   },
   "packageManager": "npm@10.9.4"
 }
